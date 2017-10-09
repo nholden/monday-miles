@@ -1,0 +1,8 @@
+{
+  "message": "Access denied",
+  "errors": [
+    {
+      "field": "access_denied"
+    }
+  ]
+}
