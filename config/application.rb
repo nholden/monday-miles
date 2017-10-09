@@ -27,5 +27,7 @@ module MondayMiles
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+    config.assets.paths << Rails.root.join('vendor', 'assets', 'strava', 'btn_strava_connectwith_orange')
   end
 end
