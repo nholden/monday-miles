@@ -22,6 +22,7 @@ gem 'omniauth-strava'
 group :development, :test do
   gem 'rspec-rails', '~> 3.6'
   gem 'capybara'
+  gem 'factory_girl_rails'
   gem 'pry'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'dotenv-rails'

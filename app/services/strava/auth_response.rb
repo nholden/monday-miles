@@ -9,8 +9,10 @@ module Strava
       data['access_token']
     end
 
-    def first_name
-      data.dig('athlete', 'firstname')
+    def athlete
+      if athlete_data = data['athlete']
+        Athlete.new(athlete_data)
+      end
     end
 
   end

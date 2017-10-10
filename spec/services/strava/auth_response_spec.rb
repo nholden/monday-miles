@@ -34,12 +34,12 @@ RSpec.describe Strava::AuthResponse do
     end
   end
 
-  describe "#first_name" do
-    When(:result) { auth_response.first_name }
+  describe "#athlete" do
+    When(:result) { auth_response.athlete }
 
     context "when authentication is successful" do
       Given(:response_data) { successful_response_data }
-      Then { result == 'John' }
+      Then { result.is_a?(Strava::Athlete) }
     end
 
     context "when authentication fails" do
@@ -47,4 +47,5 @@ RSpec.describe Strava::AuthResponse do
       Then { result.nil? }
     end
   end
+
 end
