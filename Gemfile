@@ -18,6 +18,7 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'haml'
 gem 'omniauth'
 gem 'omniauth-strava'
+gem 'rollbar'
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.6'
