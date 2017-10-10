@@ -5,6 +5,11 @@ RSpec.describe Strava::Activity do
   Given(:activity) { Strava::Activity.new(data) }
   Given(:data) { JSON.parse(file_fixture('strava/activity.json').read) }
 
+  describe "#id" do
+    When(:result) { activity.id }
+    Then { result == 999582172 }
+  end
+
   describe "#monday?" do
     Given { data['start_date_local'] = start_date_local }
 
@@ -19,7 +24,6 @@ RSpec.describe Strava::Activity do
       Given(:start_date_local) { '2017-10-10T00:00:00Z' }
       Then { result == false }
     end
-
   end
 
 end
