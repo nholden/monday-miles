@@ -2,8 +2,8 @@ module Strava
   class SessionsController < ApplicationController
 
     def create
-      if auth_hash['access_token'].present?
-        flash[:success] = "Hi, #{auth_hash['athlete']['firstname']}!"
+      if auth_response.authenticated?
+        flash[:success] = "Hi, #{auth_response.first_name}!"
       else
         flash[:error] = 'Access denied'
       end
@@ -13,8 +13,8 @@ module Strava
 
     private
 
-    def auth_hash
-      request.env['omniauth.auth']
+    def auth_response
+      AuthResponse.new(request.env['omniauth.auth'])
     end
 
   end
