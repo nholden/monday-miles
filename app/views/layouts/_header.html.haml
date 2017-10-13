@@ -2,5 +2,4 @@
   Hi, #{current_user.first_name}!
   = link_to 'Log out', session_path, method: :delete
 - else
-  = link_to '/auth/strava' do
-    = image_tag('btn_strava_connectwith_orange/btn_strava_connectwith_orange.svg', alt: 'Connect with Strava', width: 193, height: 48)
+  = link_to image_tag('btn_strava_connectwith_orange/btn_strava_connectwith_orange.svg', alt: 'Connect with Strava', width: 193, height: 48), '/auth/strava'
