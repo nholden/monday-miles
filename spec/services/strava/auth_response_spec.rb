@@ -1,10 +1,11 @@
 require 'rails_helper'
+require 'support/omniauth_helper'
 
 RSpec.describe Strava::AuthResponse do
 
   Given(:auth_response) { Strava::AuthResponse.new(response_data) }
-  Given(:successful_response_data) { JSON.parse(file_fixture('strava/successful_auth_response.json').read) }
-  Given(:failed_response_data) { JSON.parse(file_fixture('strava/failed_auth_response.json').read) }
+  Given(:successful_response_data) { parse_omniauth_fixture('strava/successful_omniauth_response.json') }
+  Given(:failed_response_data) { parse_omniauth_fixture('strava/failed_omniauth_response.json') }
 
   describe "#authenticated?" do
     When(:result) { auth_response.authenticated? }

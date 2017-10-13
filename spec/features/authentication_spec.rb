@@ -10,10 +10,10 @@ RSpec.describe "authentication" do
     When { click_link 'Connect with Strava' }
 
     context "when authentication is successful" do
-      Given(:auth_response_data) { JSON.parse(file_fixture('strava/successful_auth_response.json').read) }
+      Given(:auth_response_data) { parse_omniauth_fixture('strava/successful_omniauth_response.json') }
 
       context "when the user is new" do
-        Given(:user) { User.find_by_strava_id!(auth_response_data['athlete']['id']) }
+        Given(:user) { User.find_by_strava_id!(227615) }
 
         Then { expect(page).to have_text 'Hi, John!' }
         And { user.first_name == 'John' }
@@ -53,7 +53,7 @@ RSpec.describe "authentication" do
     end
 
     context "when authentication fails" do
-      Given(:auth_response_data) { JSON.parse(file_fixture('strava/failed_auth_response.json').read) }
+      Given(:auth_response_data) { parse_omniauth_fixture('strava/failed_omniauth_response.json') }
 
       Then { expect(page).to have_text 'Access denied' }
     end
