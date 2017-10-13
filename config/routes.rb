@@ -4,4 +4,6 @@ Rails.application.routes.draw do
     get '/auth/strava/callback', to: 'sessions#create'
   end
 
+  resource :session, only: [:destroy]
+
 end

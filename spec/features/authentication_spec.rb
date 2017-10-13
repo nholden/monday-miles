@@ -59,4 +59,18 @@ RSpec.describe "authentication" do
     end
   end
 
+  describe "log out" do
+    around { |example| use_strava_auth(parse_omniauth_fixture('strava/successful_omniauth_response.json'), &example) }
+
+    it "should log the user out" do
+      visit root_path
+      click_link 'Connect with Strava'
+      expect(page).to have_text 'Hi, John!'
+
+      click_link 'Log out'
+      expect(page).to_not have_text 'Hi, John!'
+      expect(page).to have_text 'You have been logged out'
+    end
+  end
+
 end
