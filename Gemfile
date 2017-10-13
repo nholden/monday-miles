@@ -19,6 +19,7 @@ gem 'haml'
 gem 'omniauth'
 gem 'omniauth-strava'
 gem 'rollbar'
+gem 'high_voltage'
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.6'

@@ -6,12 +6,12 @@ module Strava
         user = UserCreator.find_or_create_from_strava_athlete!(auth_response.athlete)
         user.strava_access_token = auth_response.access_token
         user.save! if user.changed?
-        flash[:success] = "Hi, #{user.first_name}!"
+        session[:current_user_id] = user.id
       else
         flash[:error] = 'Access denied'
       end
 
-      redirect_to new_session_path
+      redirect_to root_path
     end
 
     private

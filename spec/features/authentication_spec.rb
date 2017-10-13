@@ -6,7 +6,7 @@ RSpec.describe "authentication" do
   describe "login via Strava" do
     around { |example| use_strava_auth(auth_response_data, &example) }
 
-    When { visit new_session_path }
+    When { visit root_path }
     When { click_link 'Connect with Strava' }
 
     context "when authentication is successful" do

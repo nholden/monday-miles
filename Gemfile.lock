@@ -85,6 +85,7 @@ GEM
       temple (>= 0.8.0)
       tilt
     hashie (3.5.6)
+    high_voltage (3.0.0)
     i18n (0.8.6)
     jbuilder (2.7.0)
       activesupport (>= 4.2.0)
@@ -247,6 +248,7 @@ DEPENDENCIES
   dotenv-rails
   factory_girl_rails
   haml
+  high_voltage
   jbuilder (~> 2.5)
   listen (>= 3.0.5, < 3.2)
   omniauth

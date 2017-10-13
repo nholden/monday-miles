@@ -11,4 +11,9 @@
     - flash.each do |name, msg|
       = content_tag :div, msg.html_safe, class: "flash-#{name}"
 
+    - if authenticated?
+      Hi, #{current_user.first_name}!
+    - else
+      = link_to image_tag('btn_strava_connectwith_orange/btn_strava_connectwith_orange.svg', alt: 'Connect with Strava', width: 193, height: 48), '/auth/strava'
+
     = yield
