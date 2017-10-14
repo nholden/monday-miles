@@ -26,4 +26,10 @@ RSpec.describe Strava::Activity do
     end
   end
 
+  describe "#start_time" do
+    Given { data['start_date'] = '2017-10-13T12:20:55Z' }
+    When(:result) { activity.start_time }
+    Then { result == Time.parse('2017-10-13T12:20:55Z') }
+  end
+
 end

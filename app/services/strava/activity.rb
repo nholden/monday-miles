@@ -6,7 +6,11 @@ module Strava
     end
 
     def monday?
-      Date.parse(data['start_date_local']).monday?
+      Time.parse(data['start_date_local']).monday?
+    end
+
+    def start_time
+      Time.parse(data['start_date'])
     end
 
   end

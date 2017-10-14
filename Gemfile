@@ -20,6 +20,9 @@ gem 'omniauth'
 gem 'omniauth-strava'
 gem 'rollbar'
 gem 'high_voltage'
+gem 'sidekiq'
+gem 'sinatra'
+gem 'excon'
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.6'

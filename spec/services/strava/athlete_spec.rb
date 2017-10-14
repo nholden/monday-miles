@@ -55,4 +55,35 @@ RSpec.describe Strava::Athlete do
     Then { result == 'john@applestrava.com' }
   end
 
+  describe "#activities" do
+    around { |example| travel_to(Time.new(2017, 10, 14), &example) }
+
+    Given(:start_time) { 1.week.ago }
+    Given(:end_time) { Time.current }
+
+    When(:result) { strava_athlete.activities(start_time, end_time) }
+
+    context "when the athlete doesn't have an access token" do
+      Given { strava_athlete.access_token = nil }
+      Then { expect(result).to have_raised(Strava::Athlete::MissingAccessTokenError) }
+    end
+
+    context "with an access token" do
+      Given { strava_athlete.access_token = '0a0648b7875a5eab8e075504b5355c2ffe76421c' }
+
+      context "for the last week" do
+        Then { result.all? { |result| result.is_a? Strava::Activity } }
+        And { result.all? { |result| result.start_time >= start_time && result.start_time <= end_time } }
+      end
+
+      context "for a previous fortnight" do
+        Given(:start_time) { 3.weeks.ago }
+        Given(:end_time) { Time.current }
+
+        Then { result.all? { |result| result.is_a? Strava::Activity } }
+        And { result.all? { |result| result.start_time >= start_time && result.start_time <= end_time } }
+      end
+    end
+  end
+
 end
