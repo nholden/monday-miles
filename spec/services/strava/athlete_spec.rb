@@ -5,6 +5,16 @@ RSpec.describe Strava::Athlete do
   Given(:strava_athlete) { Strava::Athlete.new(data) }
   Given(:data) { JSON.parse(file_fixture('strava/athlete_summary.json').read) }
 
+  describe ".from_user" do
+    Given(:user) { FactoryGirl.create(:user, strava_id: 100, strava_access_token: 'acc3$$') }
+
+    When(:result) { Strava::Athlete.from_user(user) }
+
+    Then { result.is_a? Strava::Athlete }
+    And { result.id == 100 }
+    And { result.access_token == 'acc3$$' }
+  end
+
   describe "#id" do
     When(:result) { strava_athlete.id }
     Then { result == 227615 }
@@ -69,16 +79,20 @@ RSpec.describe Strava::Athlete do
     end
 
     context "with an access token" do
-      Given { strava_athlete.access_token = '0a0648b7875a5eab8e075504b5355c2ffe76421c' }
+      Given { strava_athlete.access_token = '00accesstoken00' }
 
       context "for the last week" do
+        around { |example| VCR.use_cassette('strava_athlete_activities_week', &example) }
+
         Then { result.all? { |result| result.is_a? Strava::Activity } }
         And { result.all? { |result| result.start_time >= start_time && result.start_time <= end_time } }
       end
 
       context "for a previous fortnight" do
+        around { |example| VCR.use_cassette('strava_athlete_activities_fortnight', &example) }
+
         Given(:start_time) { 3.weeks.ago }
-        Given(:end_time) { Time.current }
+        Given(:end_time) { 1.week.ago }
 
         Then { result.all? { |result| result.is_a? Strava::Activity } }
         And { result.all? { |result| result.start_time >= start_time && result.start_time <= end_time } }

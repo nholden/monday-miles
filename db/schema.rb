@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171010153913) do
+ActiveRecord::Schema.define(version: 20171014224125) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(version: 20171010153913) do
     t.integer "elapsed_time"
     t.integer "total_elevation_gain"
     t.string "activity_type"
-    t.datetime "start_date"
+    t.datetime "start_time"
     t.integer "utc_offset"
     t.float "start_lat"
     t.float "start_lng"

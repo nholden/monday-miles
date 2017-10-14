@@ -5,6 +5,13 @@ module Strava
 
     attr_accessor :access_token
 
+    def self.from_user(user)
+      new.tap do |athlete|
+        athlete.data = { 'id' => user.strava_id }
+        athlete.access_token = user.strava_access_token
+      end
+    end
+
     def id
       data['id']
     end
