@@ -1,8 +1,6 @@
 module Strava
   class Athlete < Struct.new(:data)
 
-    MissingAccessTokenError = Class.new(StandardError)
-
     attr_accessor :access_token
 
     def self.from_user(user)
@@ -52,15 +50,8 @@ module Strava
       data['email']
     end
 
-    def activities(start_time, end_time)
-      raise MissingAccessTokenError unless access_token
-
-      response = Excon.get('https://www.strava.com/api/v3/athlete/activities',
-                           headers: { 'Authorization' => "Bearer #{access_token}" },
-                           query: { after: start_time.to_i, before: end_time.to_i })
-
-      JSON.parse(response.body).map { |activity_data| Strava::Activity.new(activity_data) }
+    def activities(start_time:, end_time:)
+      AthleteActivities.new(access_token: access_token, start_time: start_time, end_time: end_time).activities
     end
-
   end
 end

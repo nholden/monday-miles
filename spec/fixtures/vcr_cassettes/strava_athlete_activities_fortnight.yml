@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://www.strava.com/api/v3/athlete/activities?after=1506150000&before=1507359600
+    uri: https://www.strava.com/api/v3/athlete/activities?after=1506150000&before=1507359600&page=1&per_page=200
     body:
       encoding: US-ASCII
       string: ''
@@ -19,28 +19,26 @@ http_interactions:
       Content-Type:
       - application/json; charset=UTF-8
       Date:
-      - Sat, 14 Oct 2017 23:13:48 GMT
+      - Sun, 15 Oct 2017 18:31:28 GMT
       Etag:
       - '"397bf1f3fdf6a79d70889b4a62385b6e"'
       Set-Cookie:
-      - _strava3_session=BAh7B0kiD3Nlc3Npb25faWQGOgZFVEkiJTlkZmQzNTUzYTFjYjUwMjAyZDk1NmY3MThiYzdiYjhmBjsAVEkiEGNsZWFyX2NsaWNrBjsARlQ%3D--35287e4532666b7970f0acaf99f5a54492fcff05;
+      - _strava3_session=BAh7B0kiD3Nlc3Npb25faWQGOgZFVEkiJTliNDUwZDU5N2U0YTkyMDRiNDI2OTQwZTY5OTEyZjhhBjsAVEkiEGNsZWFyX2NsaWNrBjsARlQ%3D--dc476bb3bf4cc2d3510620eb101f62fb4ef8000d;
         domain=strava.com; path=/; HttpOnly
       Status:
       - 200 OK
       Strava-Athlete-Upload-Version:
-      - 185730941fa2825775ab4f6bb7db7e15
+      - fe61367ec3c0bc19597cb34bc73850eb
       X-Frame-Options:
       - DENY
       X-Ratelimit-Limit:
       - '600,30000'
       X-Ratelimit-Usage:
-      - '16,49'
+      - '2,50'
       X-Request-Id:
-      - 01e68915c0323f61976420649a041662
+      - 56bcf7a2a23a106fc855053c27680781
       X-Ua-Compatible:
       - IE=Edge,chrome=1
-      Content-Length:
-      - '11938'
       Connection:
       - keep-alive
     body:

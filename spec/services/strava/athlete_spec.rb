@@ -71,11 +71,11 @@ RSpec.describe Strava::Athlete do
     Given(:start_time) { 1.week.ago }
     Given(:end_time) { Time.current }
 
-    When(:result) { strava_athlete.activities(start_time, end_time) }
+    When(:result) { strava_athlete.activities(start_time: start_time, end_time: end_time) }
 
     context "when the athlete doesn't have an access token" do
       Given { strava_athlete.access_token = nil }
-      Then { expect(result).to have_raised(Strava::Athlete::MissingAccessTokenError) }
+      Then { expect(result).to have_raised(Strava::AthleteActivities::MissingAccessTokenError) }
     end
 
     context "with an access token" do
@@ -96,6 +96,16 @@ RSpec.describe Strava::Athlete do
 
         Then { result.all? { |result| result.is_a? Strava::Activity } }
         And { result.all? { |result| result.start_time >= start_time && result.start_time <= end_time } }
+      end
+
+      context "when fetching all activities in time period requires multiple API calls" do
+        around { |example| VCR.use_cassette('strava_athlete_activities_two_years', &example) }
+
+        Given(:start_time) { 2.years.ago }
+
+        Then { result.all? { |result| result.is_a? Strava::Activity } }
+        And { result.all? { |result| result.start_time >= start_time && result.start_time <= end_time } }
+        And { result.count > Strava::AthleteActivities::MAX_ACTIVITIES_PER_API_CALL }
       end
     end
   end
