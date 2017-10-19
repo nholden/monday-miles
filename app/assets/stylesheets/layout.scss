@@ -1,0 +1,36 @@
+@import 'mixins/*';
+
+body {
+  margin: 0;
+  font-family: $primary-fonts;
+}
+
+a {
+  text-decoration: none;
+  transition: color 0.1s linear;
+  color: $red-light;
+
+  &:active, &:focus, &:hover {
+    color: $red-primary;
+  }
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  background-color: $grey-dark;
+  height: 48px;
+  line-height: 48px;
+  padding: 15px;
+
+  .logo {
+    color: $red-primary;
+    font-family: $logo-fonts;
+    font-size: 30px;
+    text-shadow: -3px 4px 0px $red-drop-shadow;
+  }
+
+  .navigation {
+    color: $grey-light;
+  }
+}
