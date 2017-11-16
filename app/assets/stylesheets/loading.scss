@@ -1,0 +1,9 @@
+@import 'mixins/*';
+
+.loading {
+  text-align: center;
+
+  iframe {
+    padding-top: 2em;
+  }
+}

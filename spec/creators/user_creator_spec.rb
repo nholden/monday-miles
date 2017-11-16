@@ -2,15 +2,15 @@ require 'rails_helper'
 
 RSpec.describe UserCreator do
 
-  describe ".find_or_create_from_strava_athlete!" do
+  describe ".create_from_strava_athlete!" do
     Given(:strava_athlete) { Strava::Athlete.new(athlete_data) }
     Given(:athlete_data) { JSON.parse(file_fixture('strava/athlete_summary.json').read) }
 
-    When(:result) { UserCreator.find_or_create_from_strava_athlete!(strava_athlete) }
+    When(:result) { UserCreator.create_from_strava_athlete!(strava_athlete) }
 
     context "when matching user exists" do
       Given!(:existing_user) { FactoryGirl.create(:user, strava_id: 227615) }
-      Then { result == existing_user }
+      Then { expect(result).to have_raised UserCreator::DuplicateUserError }
     end
 
     context "when matching user does not exist" do

@@ -1,8 +1,10 @@
 class UserCreator
 
-  def self.find_or_create_from_strava_athlete!(strava_athlete)
+  DuplicateUserError = Class.new(StandardError)
+
+  def self.create_from_strava_athlete!(strava_athlete, access_token: nil)
     if user = User.find_by_strava_id(strava_athlete.id)
-      user
+      raise DuplicateUserError
     else
       User.create! do |user|
         user.strava_id = strava_athlete.id
@@ -15,6 +17,7 @@ class UserCreator
         user.country = strava_athlete.country
         user.gender = strava_athlete.gender
         user.email = strava_athlete.email
+        user.strava_access_token = access_token
       end
     end
   end
