@@ -28,6 +28,7 @@ RSpec.describe "authentication" do
         And { user.strava_access_token == '83ebeabdec09f6670863766f792ead24d61fe3f9' }
 
         And { expect(page).to have_current_path('/loading') }
+        And { StravaActivityWorker.jobs.size == 1 }
       end
 
       context "when the user already exists" do

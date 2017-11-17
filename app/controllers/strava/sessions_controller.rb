@@ -11,6 +11,7 @@ module Strava
         else
           new_user = UserCreator.create_from_strava_athlete!(auth_response.athlete, access_token: auth_response.access_token)
           session[:current_user_id] = new_user.id
+          StravaActivityWorker.perform_async(new_user.id, 1.year.ago.beginning_of_year.iso8601, Time.current.iso8601)
           redirect_to '/loading'
         end
       else
