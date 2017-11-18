@@ -23,6 +23,8 @@ gem 'high_voltage'
 gem 'sidekiq'
 gem 'sinatra'
 gem 'excon'
+gem 'decent_exposure'
+gem 'draper'
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.6'

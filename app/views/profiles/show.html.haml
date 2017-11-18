@@ -1,0 +1,30 @@
+.profile
+
+  .summary
+    .content
+      .stat-group
+        .heading Streak
+        .primary-stat-container
+          .stat.stat__primary= user.streak
+          .stat-label.stat-label__primary activities
+      .stat-group
+        .heading In 2017
+        .ytd-stats
+          .secondary-stats
+            .secondary-stat-container
+              .stat.stat__secondary= user.ytd_monday_miles
+              .stat-label.stat-label__secondary miles
+            .secondary-stat-container
+              .stat.stat__secondary= user.ytd_monday_feet_elevation_gain
+              .stat-label.stat-label__secondary feet elev.
+            .secondary-stat-container
+              .stat.stat__secondary= user.ytd_monday_hours
+              .stat-label.stat-label__secondary hours
+          .primary-stat-container.primary-stat-container__ytd
+            .stat.stat__primary= user.ytd_monday_activities.count
+            .stat-label.stat-label__primary activities
+
+  .activities
+    - user.monday_activities.order(start_time: :desc).first(5).each do |activity|
+      .activity
+        = activity.name

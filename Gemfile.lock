@@ -29,6 +29,11 @@ GEM
       globalid (>= 0.3.6)
     activemodel (5.1.4)
       activesupport (= 5.1.4)
+    activemodel-serializers-xml (1.0.1)
+      activemodel (> 5.x)
+      activerecord (> 5.x)
+      activesupport (> 5.x)
+      builder (~> 3.1)
     activerecord (5.1.4)
       activemodel (= 5.1.4)
       activesupport (= 5.1.4)
@@ -65,11 +70,19 @@ GEM
     crack (0.4.3)
       safe_yaml (~> 1.0.0)
     crass (1.0.2)
+    decent_exposure (3.0.2)
+      activesupport (>= 4.0)
     diff-lcs (1.3)
     dotenv (2.2.1)
     dotenv-rails (2.2.1)
       dotenv (= 2.2.1)
       railties (>= 3.2, < 5.2)
+    draper (3.0.0)
+      actionpack (~> 5.0)
+      activemodel (~> 5.0)
+      activemodel-serializers-xml (~> 1.0)
+      activesupport (~> 5.0)
+      request_store (~> 1.0)
     erubi (1.7.0)
     excon (0.55.0)
     execjs (2.7.0)
@@ -175,6 +188,7 @@ GEM
     rb-inotify (0.9.10)
       ffi (>= 0.5.0, < 2)
     redis (3.3.3)
+    request_store (1.3.2)
     rollbar (2.15.4)
       multi_json
     rspec (3.6.0)
@@ -271,7 +285,9 @@ DEPENDENCIES
   byebug
   capybara
   coffee-rails (~> 4.2)
+  decent_exposure
   dotenv-rails
+  draper
   excon
   factory_girl_rails
   haml
@@ -304,4 +320,4 @@ RUBY VERSION
    ruby 2.4.2p198
 
 BUNDLED WITH
-   1.15.4
+   1.16.0

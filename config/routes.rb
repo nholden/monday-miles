@@ -7,6 +7,10 @@ Rails.application.routes.draw do
   end
 
   resource :session, only: [:destroy]
+  
+  resources :user, only: [], path: '/u' do
+    resource :profile, only: [:show], path: '/'
+  end
 
   # Sidekiq UI with HTTP Basic authentication
   # https://github.com/mperham/sidekiq/wiki/Monitoring
