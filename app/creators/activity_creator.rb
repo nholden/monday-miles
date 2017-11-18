@@ -24,7 +24,8 @@ class ActivityCreator
         polyline: strava_activity.polyline,
         elev_high: strava_activity.elev_high,
         elev_low: strava_activity.elev_low,
-        average_temp: strava_activity.average_temp
+        average_temp: strava_activity.average_temp,
+        monday: strava_activity.monday?
       )
     end
   end
