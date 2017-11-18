@@ -18,9 +18,16 @@ RSpec.describe StravaActivityWorker do
       Given(:start_time) { 1.week.ago }
       Given(:end_time) { Time.current }
 
-      Then { user_activities.count == 5 }
-      And { user_activities.where('start_time < ?', start_time).none? }
-      And { user_activities.where('start_time > ?', end_time).none? }
+      context "when none of the activities already exist in the database" do
+        Then { user_activities.count == 5 }
+        And { user_activities.where('start_time < ?', start_time).none? }
+        And { user_activities.where('start_time > ?', end_time).none? }
+      end
+
+      context "when one of the activities already exists in the database" do
+        Given { FactoryGirl.create(:activity, user: user, strava_id: 1228328056) }
+        Then { user_activities.count == 5 }
+      end
     end
 
     context "when setting the time window for a previous fortnight" do

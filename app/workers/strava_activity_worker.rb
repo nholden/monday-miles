@@ -6,7 +6,11 @@ class StravaActivityWorker
     user = User.find(user_id)
     athlete = Strava::Athlete.from_user(user)
     athlete.activities(start_time: Time.parse(start_time_string), end_time: Time.parse(end_time_string)).map do |strava_activity|
-      ActivityCreator.create_from_strava_activity!(strava_activity, user: user)
+      if Activity.where(strava_id: strava_activity.id).any?
+        logger.info "[StravaActivityWorker] Skipping Strava activity #{strava_activity.id}, which already exists as an Activity"
+      else
+        ActivityCreator.create_from_strava_activity!(strava_activity, user: user)
+      end
     end
   end
 
