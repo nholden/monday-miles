@@ -7,6 +7,8 @@
 
   #player
 
+- redirect_path = authenticated? ? user_profile_path(current_user) : root_path
+
 :javascript
   var tag = document.createElement('script');
   tag.src = "https://www.youtube.com/iframe_api";
@@ -33,10 +35,10 @@
 
   function onPlayerStateChange(event) {
     if (event.data == YT.PlayerState.ENDED) {
-      window.location = "/";
+      window.location = "#{redirect_path}";
     }
   }
 
   setTimeout(function () {
-    window.location = "/";
+    window.location = "#{redirect_path}";
   }, 60000);
