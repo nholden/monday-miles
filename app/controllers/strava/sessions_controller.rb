@@ -7,7 +7,7 @@ module Strava
           existing_user.strava_access_token = auth_response.access_token
           existing_user.save! if existing_user.changed?
           session[:current_user_id] = existing_user.id
-          redirect_to root_path
+          redirect_to user_profile_path(existing_user)
         else
           new_user = UserCreator.create_from_strava_athlete!(auth_response.athlete, access_token: auth_response.access_token)
           session[:current_user_id] = new_user.id

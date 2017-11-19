@@ -44,7 +44,7 @@ RSpec.describe "authentication" do
 
           Then { expect(page).to have_text 'Hi, Jane!' }
           And { existing_user.strava_access_token == '83ebeabdec09f6670863766f792ead24d61fe3f9' }
-          And { expect(page).to have_current_path(root_path) }
+          And { expect(page).to have_current_path(user_profile_path(existing_user)) }
         end
 
         context "when the user's Strava access token has changed" do
