@@ -30,10 +30,6 @@ RSpec.describe "user profiles" do
     And { expect(page).to have_text '492 feet elev.' }
     And { expect(page).to have_text '2.8 hours' }
     And { expect(page).to have_text '3 activities' }
-    And { expect(page).to have_text 'Great Monday 5k' }
-    And { expect(page).to have_text 'Lousy Monday 10k' }
-    And { expect(page).to have_text 'Decent Monday 20k' }
-    And { expect(page).to_not have_text 'Neutral Wednesday 15k' }
   end
 
 end

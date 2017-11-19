@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   
   resources :user, only: [], path: '/u' do
     resource :profile, only: [:show], path: '/'
+    resource :monday_activities, only: [:show]
   end
 
   # Sidekiq UI with HTTP Basic authentication
