@@ -25,6 +25,10 @@ gem 'sinatra'
 gem 'excon'
 gem 'decent_exposure'
 gem 'draper'
+gem 'rack-mini-profiler'
+gem 'memory_profiler'
+gem 'flamegraph'
+gem 'stackprof'
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.6'
@@ -48,5 +52,3 @@ group :test do
   gem 'launchy'
   gem 'rspec-given'
 end
-
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
