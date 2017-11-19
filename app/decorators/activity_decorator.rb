@@ -2,6 +2,20 @@ class ActivityDecorator < Draper::Decorator
 
   delegate_all
 
+  def vue_data
+    {
+      id: object.id,
+      name: object.name,
+      map: map,
+      date: date,
+      miles: miles,
+      feetElev: feet_elevation_gain,
+      hours: hours,
+    }
+  end
+
+  private
+
   def map
     h.image_tag(
       [

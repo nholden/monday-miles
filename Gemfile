@@ -29,6 +29,7 @@ gem 'rack-mini-profiler'
 gem 'memory_profiler'
 gem 'flamegraph'
 gem 'stackprof'
+gem 'webpacker', '~> 3.0'
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.6'

@@ -24,13 +24,4 @@
             .stat.stat__primary= user.ytd_monday_activities.count
             .stat-label.stat-label__primary activities
 
-  .activities
-    - user.monday_activities.order(start_time: :desc).first(5).map(&:decorate).each do |activity|
-      .activity
-        .name= activity.name
-        .map= activity.map
-        .details
-          .detail= activity.date
-          .detail #{activity.miles} miles
-          .detail #{activity.feet_elevation_gain} feet elev.
-          .detail #{activity.hours} hours
+  %activities(:activities="#{user.monday_activities.order(start_time: :desc).first(5).map { |activity| activity.decorate.vue_data }.to_json }")
