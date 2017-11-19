@@ -25,6 +25,12 @@
             .stat-label.stat-label__primary activities
 
   .activities
-    - user.monday_activities.order(start_time: :desc).first(5).each do |activity|
+    - user.monday_activities.order(start_time: :desc).first(5).map(&:decorate).each do |activity|
       .activity
-        = activity.name
+        .name= activity.name
+        .map= activity.map
+        .details
+          .detail= activity.date
+          .detail #{activity.miles} miles
+          .detail #{activity.feet_elevation_gain} feet elev.
+          .detail #{activity.hours} hours

@@ -24,15 +24,27 @@ class UserDecorator < Draper::Decorator
   end
 
   def ytd_monday_miles
-    Meters.new(object.ytd_monday_activities.pluck(:distance).reduce(&:+)).to_miles.round(1)
+    h.number_with_precision(
+      Meters.new(object.ytd_monday_activities.pluck(:distance).reduce(&:+)).to_miles,
+      precision: 1,
+      delimiter: ','
+    )
   end
 
   def ytd_monday_feet_elevation_gain
-    Meters.new(object.ytd_monday_activities.pluck(:total_elevation_gain).reduce(&:+)).to_feet.round(1)
+    h.number_with_precision(
+      Meters.new(object.ytd_monday_activities.pluck(:total_elevation_gain).reduce(&:+)).to_feet,
+      precision: 0,
+      delimiter: ','
+    )
   end
 
   def ytd_monday_hours
-    Seconds.new(object.ytd_monday_activities.pluck(:moving_time).reduce(&:+)).to_hours.round(1)
+    h.number_with_precision(
+      Seconds.new(object.ytd_monday_activities.pluck(:moving_time).reduce(&:+)).to_hours,
+      precision: 1,
+      delimiter: ','
+    )
   end
 
 end
