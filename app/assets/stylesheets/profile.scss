@@ -4,6 +4,7 @@
   .summary {
     background-color: $red-primary;
     padding: 40px 0;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 
     .content {
       display: flex;
@@ -86,7 +87,7 @@
   .activities {
     margin: 0 auto;
     max-width: 640px;
-    padding: 40px 15px;
+    padding: 15px;
 
     .activity {
       padding: 30px 0;
