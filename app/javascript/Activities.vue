@@ -1,5 +1,5 @@
 <template lang="pug">
-  .activities(v-infinite-scroll="loadMore")
+  .activities(v-infinite-scroll="loadMore" infinite-scroll-distance="60")
     activity(
       v-for="activity in activities"
       v-bind:activity="activity"
