@@ -3,6 +3,8 @@ require 'support/omniauth_helper'
 
 RSpec.describe "authentication" do
 
+  around { |example| travel_to(Time.new(2017, 11, 22), &example) }
+
   describe "login via Strava" do
     around { |example| use_strava_auth(auth_response_data, &example) }
 
@@ -26,6 +28,7 @@ RSpec.describe "authentication" do
         And { user.gender == 'M' }
         And { user.email == 'john@applestrava.com' }
         And { user.strava_access_token == '83ebeabdec09f6670863766f792ead24d61fe3f9' }
+        And { user.last_signed_in_at == Time.current }
 
         And { expect(page).to have_current_path('/loading') }
         And { StravaActivityWorker.jobs.size == 1 }
@@ -43,6 +46,7 @@ RSpec.describe "authentication" do
           Given(:strava_access_token) { '83ebeabdec09f6670863766f792ead24d61fe3f9' }
 
           Then { expect(page).to have_text 'Hi, Jane!' }
+          And { existing_user.last_signed_in_at == Time.current }
           And { existing_user.strava_access_token == '83ebeabdec09f6670863766f792ead24d61fe3f9' }
           And { expect(page).to have_current_path(user_profile_path(existing_user)) }
         end

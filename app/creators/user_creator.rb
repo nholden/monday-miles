@@ -18,6 +18,7 @@ class UserCreator
         user.gender = strava_athlete.gender
         user.email = strava_athlete.email
         user.strava_access_token = access_token
+        user.last_signed_in_at = Time.current
       end
     end
   end

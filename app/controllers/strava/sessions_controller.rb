@@ -5,7 +5,8 @@ module Strava
       if auth_response.authenticated?
         if existing_user = User.find_by_strava_id(auth_response.athlete.id)
           existing_user.strava_access_token = auth_response.access_token
-          existing_user.save! if existing_user.changed?
+          existing_user.last_signed_in_at = Time.current
+          existing_user.save!
           session[:current_user_id] = existing_user.id
           redirect_to user_profile_path(existing_user)
         else
