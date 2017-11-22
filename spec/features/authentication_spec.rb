@@ -47,6 +47,7 @@ RSpec.describe "authentication" do
 
           Then { expect(page).to have_text 'Hi, Jane!' }
           And { existing_user.last_signed_in_at == Time.current }
+          And { StravaActivityWorker.jobs.size == 1 }
           And { existing_user.strava_access_token == '83ebeabdec09f6670863766f792ead24d61fe3f9' }
           And { expect(page).to have_current_path(user_profile_path(existing_user)) }
         end
