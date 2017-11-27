@@ -1,1 +1,41 @@
-This is the home page
+.home
+  .hero
+    .title
+      Mondays are hard
+    .tagline
+      Celebrate your Monday greatness
+
+  .content
+    %p
+      Monday Miles analyzes your Strava data to tell you:
+
+    .feature
+      .icon
+        %i{ class: 'fa fa-rocket' }
+      .copy
+        .title
+          Streak
+        .description
+          How many Mondays in a row have you logged a run, bike, or other Strava activity?
+
+    .feature
+      .icon
+        %i{ class: 'fa fa-calendar' }
+      .copy
+        .title
+          Year-to-date
+        .description
+          How many Monday activities have you logged this year? How far, how high, and how long did you go?
+
+    .feature
+      .icon
+        %i{ class: 'fa fa-map' }
+      .copy
+        .title
+          Activities
+        .description
+          What did your most recent Monday activities look like?
+
+    %p
+      #{link_to 'Connect with Strava', '/auth/strava'} now to begin celebrating your Monday greatness,
+      or check out #{link_to 'this sample profile', user_profile_path(User.first)}.
