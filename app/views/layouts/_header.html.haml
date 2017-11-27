@@ -1,6 +1,6 @@
 .header
   .logo
-    Monday Miles
+    = link_to(image_tag('logo.svg', alt: 'Monday Miles logo'), root_path)
   .navigation
     - if authenticated?
       Hi, #{current_user.first_name}!
