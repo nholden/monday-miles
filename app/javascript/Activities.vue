@@ -1,10 +1,17 @@
 <template lang="pug">
-  .activities(v-infinite-scroll="loadMore" infinite-scroll-distance="60")
-    activity(
-      v-for="activity in activities"
-      v-bind:activity="activity"
-      v-bind:key="activity.id"
-    )
+  .activities
+    .container(v-infinite-scroll="loadMore")
+      activity(
+        v-for="activity in activities"
+        v-bind:activity="activity"
+        v-bind:key="activity.id"
+      )
+    .loader
+      .loading-indicator(v-if="loading")
+        i(class="fa fa-spinner fa-pulse fa-fw")
+        span Loading...
+      .loading-link(v-else)
+        a(v-on:click.prevent="loadMore" href='#') Load more
 </template>
 
 <script lang="coffee">
@@ -18,13 +25,17 @@ export default
   data: ->
     page: 1
     activities: []
+    loading: false
+  mounted: -> @loadMore()
   methods:
     loadMore: ->
+      @loading = true
       xhr = new XMLHttpRequest()
       xhr.open('GET', "#{@requestUrl}?page=#{@page}")
       xhr.onload = =>
         @activities = @activities.concat(JSON.parse(xhr.responseText))
         @page += 1
+        @loading = false
       xhr.send()
   components: { Activity }
   directives: { infiniteScroll }

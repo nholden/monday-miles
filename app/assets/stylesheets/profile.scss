@@ -107,4 +107,17 @@
       }
     }
   }
+
+  .loader {
+    text-align: center;
+    padding: 30px 0;
+
+    .loading-indicator {
+      color: $red-light;
+
+      span {
+        margin-left: 4px;
+      }
+    }
+  }
 }
