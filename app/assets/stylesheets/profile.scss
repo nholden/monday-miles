@@ -103,7 +103,13 @@
 
       .details {
         display: flex;
+        flex-wrap: wrap;
         justify-content: space-between;
+        margin: -4px -15px;
+
+        .detail {
+          padding: 4px 15px;
+        }
       }
     }
   }
