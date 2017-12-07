@@ -1,24 +1,35 @@
-# README
+# Monday Miles
+Strava data visualizer that helps athletes celebrate their Monday greatness
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Installation
+```
+git clone git://github.com/nholden/monday-miles
+cd monday-miles
+brew install redis postgresql heroku
+bundle install
+bundle exec rake db:reset
+cp .env.example .env
+```
 
-Things you may want to cover:
+## Getting started
+Sign up for a Strava API key at [https://developers.strava.com](https://developers.strava.com) and a Google Static Maps API key at [https://developers.google.com/maps/documentation/static-maps/](https://developers.google.com/maps/documentation/static-maps/) and update `.env`.
 
-* Ruby version
+Start these long-running processes in separate terminal windows:
 
-* System dependencies
+```
+heroku local
+webpack-dev-server
+```
 
-* Configuration
+Monday Miles should be accessible at http://localhost:3000 (or whichever port you specify in `.env`).
 
-* Database creation
+## Testing
+```
+bundle exec rake
+```
 
-* Database initialization
+## Contributing
+Contributions are welcome from everyone! Feel free to make a pull request or use GitHub issues for help getting started, to report bugs, or to make feature requests.
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## License
+This project was created by [Nick Holden](https://nickholen.io) and is licensed under the terms of the MIT license.
