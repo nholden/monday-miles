@@ -7,8 +7,8 @@ git clone git://github.com/nholden/monday-miles
 cd monday-miles
 brew install redis postgresql heroku
 bundle install
-bundle exec rake db:reset
 cp .env.example .env
+bundle exec rake db:reset
 ```
 
 ## Getting started
