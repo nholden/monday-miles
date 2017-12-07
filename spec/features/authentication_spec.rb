@@ -9,7 +9,7 @@ RSpec.describe "authentication" do
     around { |example| use_strava_auth(auth_response_data, &example) }
 
     When { visit root_path }
-    When { click_link 'Connect with Strava' }
+    When { click_link 'Connect with Strava', match: :first }
 
     context "when authentication is successful" do
       Given(:auth_response_data) { parse_omniauth_fixture('strava/successful_omniauth_response.json') }
@@ -73,7 +73,7 @@ RSpec.describe "authentication" do
 
     it "should log the user out" do
       visit root_path
-      click_link 'Connect with Strava'
+      click_link 'Connect with Strava', match: :first
       expect(page).to have_text 'Hi, John!'
 
       click_link 'Log out'
