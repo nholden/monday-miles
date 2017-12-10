@@ -1,5 +1,5 @@
 # Monday Miles
-Strava data visualizer that helps athletes celebrate their Monday greatness
+Strava data visualizer that helps athletes celebrate Monday finishes
 
 ## Installation
 ```
