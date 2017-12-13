@@ -34,9 +34,9 @@ export default
       xhr.open('GET', "#{@requestUrl}?page=#{@page}")
       xhr.onload = =>
         @activities = @activities.concat(JSON.parse(xhr.responseText))
-        @page += 1
         @loading = false
       xhr.send()
+      @page += 1
   components: { Activity }
   directives: { infiniteScroll }
 </script>
