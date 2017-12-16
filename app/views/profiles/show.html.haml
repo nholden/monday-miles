@@ -1,7 +1,12 @@
 .profile
 
   .summary
-    .content
+    .user-content
+      .photo= image_tag user.large_profile_image_url
+      .details
+        .name= user.full_name
+        .location= user.location
+    .stats-content
       .stat-group
         .heading Streak
         .primary-stat-container

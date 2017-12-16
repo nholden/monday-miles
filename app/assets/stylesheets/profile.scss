@@ -6,7 +6,42 @@
     padding: 40px 0;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 
-    .content {
+    .user-content {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      margin: 0 auto;
+      padding: 25px 15px;
+      max-width: 800px;
+
+      .photo {
+        margin: 0 10px;
+
+        img {
+          height: 124px;
+          width: 124px;
+          border-radius: 62px;
+        }
+      }
+
+      .details {
+        margin: 10px;
+        text-align: center;
+
+        .name {
+          font-size: 40px;
+          color: $white;
+        }
+
+        .location {
+          font-size: 20px;
+          color: $red-lightest;
+        }
+      }
+    }
+
+    .stats-content {
       display: flex;
       justify-content: space-between;
       flex-wrap: wrap;
