@@ -144,6 +144,10 @@
 
         .detail {
           padding: 4px 15px;
+
+          a.strava-link {
+            color: $strava-orange;
+          }
         }
       }
     }

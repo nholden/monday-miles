@@ -7,6 +7,9 @@
       .detail {{ activity.miles }} miles
       .detail {{ activity.feetElev }} feet elev.
       .detail {{ activity.hours }} hours
+      .detail
+        a(:href="activity.stravaUrl" target="_blank" rel="noopener" class="strava-link")
+          | View on Strava
 </template>
 
 <script lang="coffee">

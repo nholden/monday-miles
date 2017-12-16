@@ -5,6 +5,7 @@ class ActivityDecorator < Draper::Decorator
   def vue_data
     {
       id: object.id,
+      stravaUrl: strava_url,
       name: object.name,
       map: map,
       date: date,
@@ -15,6 +16,11 @@ class ActivityDecorator < Draper::Decorator
   end
 
   private
+  
+  def strava_url
+    "https://www.strava.com/activities/#{object.strava_id}"
+  end
+
 
   def map
     h.image_tag(
