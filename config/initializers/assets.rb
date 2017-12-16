@@ -12,4 +12,7 @@ Rails.application.config.assets.paths << Rails.root.join('node_modules')
 # application.js, application.css, and all non-JS/CSS in the app/assets
 # folder are already added.
 # Rails.application.config.assets.precompile += %w( admin.js admin.css )
-Rails.application.config.assets.precompile += %w( btn_strava_connectwith_orange.svg )
+Rails.application.config.assets.precompile += %w(
+  btn_strava_connectwith_orange.svg
+  pwrdBy_strava_white/api_logo_pwrdBy_strava_stack_white.svg 
+)

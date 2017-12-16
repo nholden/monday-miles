@@ -70,3 +70,11 @@ a {
     }
   }
 }
+
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $grey-dark;
+  height: 120px;
+}
