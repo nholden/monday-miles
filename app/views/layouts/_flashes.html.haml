@@ -1,0 +1,8 @@
+.flash-container
+  - flash.each do |name, msg|
+    = check_box_tag "flash-#{name}"
+    %div{class: "flash flash__#{name}"}
+      = msg
+      = label_tag "flash-#{name}" do
+        %a
+          (close)

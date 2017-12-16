@@ -27,3 +27,46 @@ a {
     color: $grey-light;
   }
 }
+
+.flash-container {
+  position: absolute;
+  width: 100%;
+  top: 20px;
+
+  input {
+    display: none;
+  }
+
+  input:checked + .flash{
+    display: none;
+  }
+
+  .flash {
+    margin: 0px auto;
+    max-width: 500px;
+    text-align: center;
+    padding: 10px;
+    border-radius: 5px;
+
+    &__notice {
+      background-color: $green;
+    }
+
+    &__error {
+      background-color: $red-primary;
+      color: $white;
+
+      a {
+        color: $grey-light;
+      }
+
+      a:hover {
+        color: $white;
+      }
+    }
+
+    a:hover {
+      cursor: pointer;
+    }
+  }
+}
