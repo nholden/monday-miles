@@ -9,7 +9,8 @@
       .detail {{ activity.hours }} hours
       .detail
         a(:href="activity.stravaUrl" target="_blank" rel="noopener" class="strava-link")
-          | View on Strava
+          .strava-button
+            | View on Strava
 </template>
 
 <script lang="coffee">

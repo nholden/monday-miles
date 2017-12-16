@@ -139,14 +139,25 @@
       .details {
         display: flex;
         flex-wrap: wrap;
+        align-items: center;
         justify-content: space-between;
         margin: -4px -15px;
 
         .detail {
           padding: 4px 15px;
 
-          a.strava-link {
-            color: $strava-orange;
+          .strava-button {
+            background-color: $strava-orange;
+            color: $white;
+            font-family: $strava-fonts;
+            font-size: 12px;
+            padding: 5px 10px;
+            border-radius: 2px;
+            transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+
+            &:hover {
+              background-color: #c93d02;
+            }
           }
         }
       }
