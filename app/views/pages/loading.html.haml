@@ -5,40 +5,4 @@
     We&rsquo;re crunching your numbers right now, and in less than
     a minute, we&rsquo;ll tell you all about your Monday finishes.
 
-  #player
-
-- redirect_path = authenticated? ? user_profile_path(current_user.slug) : root_path
-
-:javascript
-  var tag = document.createElement('script');
-  tag.src = "https://www.youtube.com/iframe_api";
-  var firstScriptTag = document.getElementsByTagName('script')[0];
-  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-  function onYouTubeIframeAPIReady() {
-    new YT.Player('player', {
-      height: '390',
-      width: '640',
-      videoId: '98mBl9d0dew',
-      playerVars: {
-        'autoplay': 1,
-        'controls': 0,
-        'disablekb': 1,
-        'modestbranding': 1,
-        'showinfo': 0
-      },
-      events: {
-        'onStateChange': onPlayerStateChange
-      }
-    });
-  }
-
-  function onPlayerStateChange(event) {
-    if (event.data == YT.PlayerState.ENDED) {
-      window.location = "#{redirect_path}";
-    }
-  }
-
-  setTimeout(function () {
-    window.location = "#{redirect_path}";
-  }, 60000);
+  %loading-video{'redirect-path' => authenticated? ? user_profile_path(current_user.slug) : root_path}

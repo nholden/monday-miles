@@ -9,7 +9,8 @@
     "vue-infinite-scroll": "^2.0.2",
     "vue-loader": "^13.5.0",
     "vue-template-compiler": "^2.5.6",
-    "vue-turbolinks": "^2.0.0"
+    "vue-turbolinks": "^2.0.0",
+    "youtube-player": "^5.4.0"
   },
   "devDependencies": {
     "webpack-dev-server": "^2.9.4"
