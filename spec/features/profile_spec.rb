@@ -5,7 +5,7 @@ RSpec.describe "user profiles" do
   around { |example| travel_to(Time.new(2017, 11, 18), &example) }
 
   Given(:user) { FactoryGirl.create(:user) }
-  When { visit user_profile_path(user) }
+  When { visit user_profile_path(user.slug) }
 
   def activity(trait, distance:, elevation:, duration:, name:)
     FactoryGirl.create(

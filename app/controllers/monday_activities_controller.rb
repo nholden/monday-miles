@@ -1,6 +1,6 @@
 class MondayActivitiesController < ApplicationController
 
-  expose(:user) { User.find(params[:user_id]) }
+  expose(:user) { User.find_by_slug(params[:user_slug]) }
   expose(:page) { params[:page] || 1 }
 
   def show

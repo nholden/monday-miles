@@ -22,7 +22,7 @@ RSpec.describe "user monday activities request" do
     activity(:four_mondays_ago, distance: 20_000, elevation: 75, duration: 6_000, name: 'Decent Monday 20k')
     activity(:wednesday, distance: 15_000, elevation: 100, duration: 5_000, name: 'Neutral Wednesday 15k')
 
-    get user_monday_activities_path(user), as: :json
+    get user_monday_activities_path(user.slug), as: :json
 
     expect(response.status).to eql 200
     expect(response.parsed_body.length).to eql 3

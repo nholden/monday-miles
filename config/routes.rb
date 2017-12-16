@@ -7,8 +7,8 @@ Rails.application.routes.draw do
   end
 
   resource :session, only: [:destroy]
-  
-  resources :user, only: [], path: '/u' do
+
+  resources :user, only: [], path: '/u', param: :slug do
     resource :profile, only: [:show], path: '/'
     resource :monday_activities, only: [:show]
   end

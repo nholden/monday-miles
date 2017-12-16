@@ -3,7 +3,7 @@
     = link_to(image_tag('logo.svg', alt: 'Monday Miles logo'), root_path)
   .navigation
     - if authenticated?
-      Hi, #{link_to current_user.first_name, user_profile_path(current_user)}!
+      Hi, #{link_to current_user.first_name, user_profile_path(current_user.slug)}!
       = link_to 'Log out', session_path, method: :delete
     - else
       = link_to image_tag('btn_strava_connectwith_orange/btn_strava_connectwith_orange.svg', alt: 'Connect with Strava', width: 193, height: 48), '/auth/strava'

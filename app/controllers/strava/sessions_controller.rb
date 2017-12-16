@@ -9,7 +9,7 @@ module Strava
           existing_user.save!
           StravaActivityWorker.perform_async(existing_user.id, existing_user.last_signed_in_at.try(:iso8601), Time.current.iso8601)
           session[:current_user_id] = existing_user.id
-          redirect_to user_profile_path(existing_user)
+          redirect_to user_profile_path(existing_user.slug)
         else
           new_user = UserCreator.create_from_strava_athlete!(auth_response.athlete, access_token: auth_response.access_token)
           session[:current_user_id] = new_user.id

@@ -29,6 +29,7 @@ RSpec.describe "authentication" do
         And { user.email == 'john@applestrava.com' }
         And { user.strava_access_token == '83ebeabdec09f6670863766f792ead24d61fe3f9' }
         And { user.last_signed_in_at == Time.current }
+        And { user.slug == 'john-applestrava' }
 
         And { expect(page).to have_current_path('/loading') }
         And { StravaActivityWorker.jobs.size == 1 }
@@ -49,7 +50,7 @@ RSpec.describe "authentication" do
           And { existing_user.last_signed_in_at == Time.current }
           And { StravaActivityWorker.jobs.size == 1 }
           And { existing_user.strava_access_token == '83ebeabdec09f6670863766f792ead24d61fe3f9' }
-          And { expect(page).to have_current_path(user_profile_path(existing_user)) }
+          And { expect(page).to have_current_path(user_profile_path(existing_user.slug)) }
         end
 
         context "when the user's Strava access token has changed" do

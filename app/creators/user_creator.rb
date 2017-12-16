@@ -19,6 +19,10 @@ class UserCreator
         user.email = strava_athlete.email
         user.strava_access_token = access_token
         user.last_signed_in_at = Time.current
+        user.slug = UserSlugGenerator.new(
+                      first_name: strava_athlete.first_name,
+                      last_name: strava_athlete.last_name
+                    ).generate
       end
     end
   end

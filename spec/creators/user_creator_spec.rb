@@ -25,6 +25,7 @@ RSpec.describe UserCreator do
       And { user.country == 'United States' }
       And { user.gender == 'M' }
       And { user.email == 'john@applestrava.com' }
+      And { user.slug == 'john-applestrava' }
     end
   end
 
