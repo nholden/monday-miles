@@ -23,16 +23,18 @@ class ActivityDecorator < Draper::Decorator
 
 
   def map
-    h.image_tag(
-      [
-        "https://maps.googleapis.com/maps/api/staticmap?size=640x300",
-        "path=weight:3%7Ccolor:0xE83A30%7Cenc:#{object.polyline}",
-        "key=#{ENV.fetch('GOOGLE_API_KEY')}"
-      ].join('&'),
-      width: '100%',
-      height: 'auto',
-      alt: "Map of #{activity.name}"
-    )
+    if object.polyline.present?
+      h.image_tag(
+        [
+          "https://maps.googleapis.com/maps/api/staticmap?size=640x300",
+          "path=weight:3%7Ccolor:0xE83A30%7Cenc:#{object.polyline}",
+          "key=#{ENV.fetch('GOOGLE_API_KEY')}"
+        ].join('&'),
+        width: '100%',
+        height: 'auto',
+        alt: "Map of #{activity.name}"
+      )
+    end
   end
 
   def date

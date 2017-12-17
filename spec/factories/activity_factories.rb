@@ -1,6 +1,9 @@
 FactoryGirl.define do
   factory :activity do
 
+    polyline 'abc123'
+    start_time { Time.current }
+
     trait :last_monday do
       start_time { Time.current.monday }
       monday true

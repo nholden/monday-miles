@@ -1,7 +1,7 @@
 <template lang="pug">
   .activity
     .name {{ activity.name }}
-    .map(v-html="activity.map")
+    .map(v-if="activity.map" v-html="activity.map")
     .details
       .detail {{ activity.date }}
       .detail {{ activity.miles }} miles
