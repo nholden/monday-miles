@@ -6,7 +6,7 @@
       .detail {{ activity.date }}
       .detail {{ activity.miles }} miles
       .detail {{ activity.feetElev }} feet elev.
-      .detail {{ activity.hours }} hours
+      .detail {{ activity.duration }} moving
       .detail
         a(:href="activity.stravaUrl" target="_blank" rel="noopener" class="strava-link")
           .strava-button

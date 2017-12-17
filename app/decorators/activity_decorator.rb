@@ -11,12 +11,12 @@ class ActivityDecorator < Draper::Decorator
       date: date,
       miles: miles,
       feetElev: feet_elevation_gain,
-      hours: hours,
+      duration: duration,
     }
   end
 
   private
-  
+
   def strava_url
     "https://www.strava.com/activities/#{object.strava_id}"
   end
@@ -55,12 +55,8 @@ class ActivityDecorator < Draper::Decorator
     )
   end
 
-  def hours
-    h.number_with_precision(
-      Seconds.new(object.moving_time).to_hours,
-      precision: 1,
-      delimiter: ','
-    )
+  def duration
+    Seconds.new(object.moving_time).to_duration
   end
 
 end
