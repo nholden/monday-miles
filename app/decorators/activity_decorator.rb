@@ -28,7 +28,7 @@ class ActivityDecorator < Draper::Decorator
         [
           "https://maps.googleapis.com/maps/api/staticmap?size=640x300",
           "path=weight:3%7Ccolor:0xE83A30%7Cenc:#{object.polyline}",
-          "key=#{ENV.fetch('GOOGLE_API_KEY')}"
+          "key=#{ENV['GOOGLE_API_KEY']}"
         ].join('&'),
         width: '100%',
         height: 'auto',
