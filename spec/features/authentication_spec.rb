@@ -39,18 +39,24 @@ RSpec.describe "authentication" do
         Given!(:existing_user) { FactoryGirl.create(:user,
                                                     strava_id: 227615,
                                                     strava_access_token: strava_access_token,
-                                                    first_name: 'Jane') }
+                                                    first_name: 'Jane',
+                                                    last_signed_in_at: 2.days.ago) }
 
         When { existing_user.reload }
 
         context "when the user's Strava access token is the same" do
           Given(:strava_access_token) { '83ebeabdec09f6670863766f792ead24d61fe3f9' }
+          Given(:strava_activity_worker_args) { StravaActivityWorker.jobs.last['args'] }
+          Given(:job_start_time) { strava_activity_worker_args[1] }
+          Given(:job_end_time) { strava_activity_worker_args[2] }
 
           Then { expect(page).to have_text 'Hi, Jane!' }
           And { existing_user.last_signed_in_at == Time.current }
-          And { StravaActivityWorker.jobs.size == 1 }
           And { existing_user.strava_access_token == '83ebeabdec09f6670863766f792ead24d61fe3f9' }
           And { expect(page).to have_current_path(user_profile_path(existing_user.slug)) }
+          And { StravaActivityWorker.jobs.size == 1 }
+          And { job_start_time == 2.days.ago.iso8601 }
+          And { job_end_time == Time.current.iso8601 }
         end
 
         context "when the user's Strava access token has changed" do
