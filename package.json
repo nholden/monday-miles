@@ -1,6 +1,9 @@
 {
   "name": "monday-miles",
   "private": true,
+  "engines": {
+    "node": "9.3.0"
+  },
   "dependencies": {
     "@rails/webpacker": "^3.0.2",
     "coffeescript": "1.12.7",
