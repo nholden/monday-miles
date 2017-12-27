@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "user profiles" do
 
-  around { |example| travel_to(Time.new(2017, 11, 18), &example) }
+  around { |example| travel_to(Time.iso8601('2017-11-18T00:00:00-07:00'), &example) }
 
   Given(:user) { FactoryGirl.create(:user) }
   When { visit user_profile_path(user.slug) }

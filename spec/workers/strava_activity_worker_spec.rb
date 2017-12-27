@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe StravaActivityWorker do
 
-  around { |example| travel_to(Time.new(2017, 10, 14), &example) }
+  around { |example| travel_to(Time.iso8601('2017-10-14T00:00:00-07:00'), &example) }
 
   Given(:worker) { StravaActivityWorker.new }
 

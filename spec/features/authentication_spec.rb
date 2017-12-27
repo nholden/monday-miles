@@ -3,7 +3,7 @@ require 'support/omniauth_helper'
 
 RSpec.describe "authentication" do
 
-  around { |example| travel_to(Time.new(2017, 11, 22), &example) }
+  around { |example| travel_to(Time.iso8601('2017-11-22T00:00:00-07:00'), &example) }
 
   describe "login via Strava" do
     around { |example| use_strava_auth(auth_response_data, &example) }

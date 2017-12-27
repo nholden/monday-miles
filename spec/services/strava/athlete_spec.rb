@@ -66,7 +66,7 @@ RSpec.describe Strava::Athlete do
   end
 
   describe "#activities" do
-    around { |example| travel_to(Time.new(2017, 10, 14), &example) }
+    around { |example| travel_to(Time.iso8601('2017-10-14T00:00:00-07:00'), &example) }
 
     Given(:start_time) { 1.week.ago }
     Given(:end_time) { Time.current }
