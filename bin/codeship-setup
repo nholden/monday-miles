@@ -1,7 +1,6 @@
 #!/bin/bash
 
 export RAILS_ENV=test
-rvm use $(cat .ruby-version) --install
 gem install bundler
 bundle install
 npm install --global yarn@1.3.2
