@@ -101,7 +101,7 @@ GEM
       sorcerer (>= 0.3.7)
     globalid (0.4.0)
       activesupport (>= 4.2.0)
-    haml (5.0.3)
+    haml (5.0.4)
       temple (>= 0.8.0)
       tilt
     hashdiff (0.3.4)
@@ -365,7 +365,7 @@ DEPENDENCIES
   webpacker (~> 3.0)
 
 RUBY VERSION
-   ruby 2.4.3p205
+   ruby 2.5.0p0
 
 BUNDLED WITH
-   1.16.0
+   1.16.1
