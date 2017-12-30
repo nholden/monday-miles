@@ -10,8 +10,9 @@
       .stat-group
         .heading Streak
         .primary-stat-container
-          .stat.stat__primary= user.monday_streak_current_length
-          .stat-label.stat-label__primary activities
+          .stat.stat__primary= user.recent_monday_streak_length
+          - if user.recent_monday_streak_dates_string
+            .stat-label.stat-label__primary= user.recent_monday_streak_dates_string
       .stat-group
         .heading In #{Date.current.year}
         .ytd-stats

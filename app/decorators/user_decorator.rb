@@ -10,6 +10,11 @@ class UserDecorator < Draper::Decorator
     "#{object.city}, #{object.state}"
   end
 
+  def recent_monday_streak_dates_string
+    return nil if object.recent_monday_streak_length == 0
+    "#{h.l(object.recent_monday_streak_started)} to #{h.l(object.recent_monday_streak_ended)}"
+  end
+
   def ytd_monday_miles
     h.number_with_precision(
       Meters.new(object.ytd_monday_activities.pluck(:distance).reduce(&:+)).to_miles,

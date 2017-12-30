@@ -25,7 +25,7 @@ RSpec.describe "user profiles" do
     Given { activity(:four_mondays_ago, distance: 20_000, elevation: 75, seconds: 6_000, name: 'Decent Monday 20k') }
     Given { activity(:wednesday, distance: 15_000, elevation: 100, seconds: 5_000, name: 'Neutral Wednesday 15k') }
 
-    Then { expect(page).to have_text 'Streak 2 activities' }
+    Then { expect(page).to have_text 'Streak 2 Nov. 6, 2017 to Nov. 13, 2017' }
     And { expect(page).to have_text '21.7 miles' }
     And { expect(page).to have_text '492 feet elev.' }
     And { expect(page).to have_text '2.8 hours' }

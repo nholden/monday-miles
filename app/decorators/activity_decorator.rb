@@ -8,7 +8,7 @@ class ActivityDecorator < Draper::Decorator
       stravaUrl: strava_url,
       name: object.name,
       map: map,
-      date: date,
+      date: h.l(object.start_time.to_date),
       miles: miles,
       feetElev: feet_elevation_gain,
       duration: duration,
@@ -35,10 +35,6 @@ class ActivityDecorator < Draper::Decorator
         alt: "Map of #{activity.name}"
       )
     end
-  end
-
-  def date
-    object.start_time.strftime('%b. %e, %Y')
   end
 
   def miles
