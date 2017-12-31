@@ -1,67 +1,68 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>The change you wanted was rejected (422)</title>
+  <title>We're sorry, but something went wrong (422)</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <style>
-  .rails-default-error-page {
-    background-color: #EFEFEF;
-    color: #2E2F30;
-    text-align: center;
-    font-family: arial, sans-serif;
+  @import url("https://fonts.googleapis.com/css?family=Nunito");
+
+  html, body {
     margin: 0;
+    font-family: "Nunito", -apple-system, BlinkMacSystemFont, "Avenir Next", "Avenir", "Segoe UI", "Lucida Grande", "Helvetica Neue", "Helvetica", "Fira Sans", "Roboto", "Noto", "Droid Sans", "Cantarell", "Oxygen", "Ubuntu", "Franklin Gothic Medium", "Century Gothic", "Liberation Sans", sans-serif;
+    height: 100%;
   }
 
-  .rails-default-error-page div.dialog {
-    width: 95%;
-    max-width: 33em;
-    margin: 4em auto 0;
+  .header {
+    display: flex;
+    justify-content: space-between;
+    background-color: #332929;
+    height: 48px;
+    line-height: 48px;
+    padding: 15px;
   }
 
-  .rails-default-error-page div.dialog > div {
-    border: 1px solid #CCC;
-    border-right-color: #999;
-    border-left-color: #999;
-    border-bottom-color: #BBB;
-    border-top: #B00100 solid 4px;
-    border-top-left-radius: 9px;
-    border-top-right-radius: 9px;
-    background-color: white;
-    padding: 7px 12% 0;
-    box-shadow: 0 3px 8px rgba(50, 50, 50, 0.17);
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100% - 78px);
+    background-color: #e83a30;
+    background-image: url("data:image/svg+xml,%3Csvg width='44' height='12' viewBox='0 0 44 12' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 12v-2L0 0v10l4 2h16zm18 0l4-2V0L22 10v2h16zM20 0v8L4 0h16zm18 0L22 8V0h16z' fill='%23e57a73' fill-opacity='0.4' fill-rule='evenodd'/%3E%3C/svg%3E");
   }
 
-  .rails-default-error-page h1 {
-    font-size: 100%;
-    color: #730E15;
-    line-height: 1.5em;
+  .container .content {
+    color: #ffffff;
+    text-align: center;
+    padding: 0 15px;
   }
 
-  .rails-default-error-page div.dialog > p {
-    margin: 0 0 1em;
-    padding: 1em;
-    background-color: #F7F7F7;
-    border: 1px solid #CCC;
-    border-right-color: #999;
-    border-left-color: #999;
-    border-bottom-color: #999;
-    border-bottom-left-radius: 4px;
-    border-bottom-right-radius: 4px;
-    border-top-color: #DADADA;
-    color: #666;
-    box-shadow: 0 3px 8px rgba(50, 50, 50, 0.17);
+  .container .content .headline {
+    font-size: 50px;
+  }
+
+  .container .content .details {
+    font-size: 20px;
   }
   </style>
 </head>
 
-<body class="rails-default-error-page">
-  <!-- This file lives in public/422.html -->
-  <div class="dialog">
-    <div>
-      <h1>The change you wanted was rejected.</h1>
-      <p>Maybe you tried to change something you didn't have access to.</p>
+<body>
+  <div class="header">
+    <div class="logo">
+      <a href="/"><img alt="Monday Miles logo" src="logo.svg" /></a>
     </div>
-    <p>If you are the application owner check the logs for more information.</p>
+  </div>
+  <div class='container'>
+    <div class='content'>
+      <div class='headline'>
+        &#128553;<br />
+        Something went wrong
+      </div>
+      <div class='details'>
+        <p>It&rsquo;s our fault, and we&rsquo;re sorry. We&rsquo;ve been notified of the error, and we&rsquo;ll fix it as quickly as possible.</p>
+      </div>
+    </div>
   </div>
 </body>
+
 </html>
