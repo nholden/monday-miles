@@ -72,14 +72,12 @@ a {
 }
 
 .footer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  text-align: center;
   background-color: $grey-dark;
-  height: 120px;
   color: $white;
+  padding: 20px 0;
 
   div {
-    padding: 0 30px;
+    padding: 20px 0;
   }
 }
