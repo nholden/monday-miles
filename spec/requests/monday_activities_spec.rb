@@ -28,27 +28,29 @@ RSpec.describe "user monday activities request" do
 
   it "fetches JSON with activity data for current year" do
     get user_monday_activities_path(user.slug), as: :json
+    activities = response.parsed_body['activities']
 
     expect(response.status).to eql 200
-    expect(response.parsed_body.length).to eql 2
-    expect(response.parsed_body.first['name']).to eql 'Great Monday 5k'
-    expect(response.parsed_body.first['map']).to be_present
-    expect(response.parsed_body.first['miles']).to eql '3.1'
-    expect(response.parsed_body.first['feetElev']).to eql '82'
-    expect(response.parsed_body.first['duration']).to eql '20:00'
-    expect(response.parsed_body.first['stravaUrl']).to eql 'https://www.strava.com/activities/123'
+    expect(activities.length).to eql 2
+    expect(activities.first['name']).to eql 'Great Monday 5k'
+    expect(activities.first['map']).to be_present
+    expect(activities.first['miles']).to eql '3.1'
+    expect(activities.first['feetElev']).to eql '82'
+    expect(activities.first['duration']).to eql '20:00'
+    expect(activities.first['stravaUrl']).to eql 'https://www.strava.com/activities/123'
   end
 
   it "fetches JSON with activity data for previous year" do
     get user_monday_activities_path(user.slug, year: 2017), as: :json
+    activities = response.parsed_body['activities']
 
     expect(response.status).to eql 200
-    expect(response.parsed_body.length).to eql 1
-    expect(response.parsed_body.first['name']).to eql 'Decent Monday 20k'
-    expect(response.parsed_body.first['map']).to be_present
-    expect(response.parsed_body.first['miles']).to eql '12.4'
-    expect(response.parsed_body.first['feetElev']).to eql '246'
-    expect(response.parsed_body.first['duration']).to eql '1:40:00'
-    expect(response.parsed_body.first['stravaUrl']).to eql 'https://www.strava.com/activities/789'
+    expect(activities.length).to eql 1
+    expect(activities.first['name']).to eql 'Decent Monday 20k'
+    expect(activities.first['map']).to be_present
+    expect(activities.first['miles']).to eql '12.4'
+    expect(activities.first['feetElev']).to eql '246'
+    expect(activities.first['duration']).to eql '1:40:00'
+    expect(activities.first['stravaUrl']).to eql 'https://www.strava.com/activities/789'
   end
 end

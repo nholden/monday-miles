@@ -42,7 +42,7 @@ export default
       xhr = new XMLHttpRequest()
       xhr.open('GET', "#{@requestUrl}?year=#{@year}")
       xhr.onload = =>
-        @activities = JSON.parse(xhr.responseText)
+        @activities = JSON.parse(xhr.responseText).activities
         setTimeout((=> @loading = false), 1000)
       xhr.send()
 
