@@ -1,34 +1,18 @@
 .profile
 
   .summary
-    .user-content
+    .user
       .photo= image_tag user.large_profile_image_url
       .details
         .name= user.full_name
         .location= user.location
-    .stats-content
+    .stats
       .stat-group
         .heading Streak
         .primary-stat-container
           .stat.stat__primary= user.recent_monday_streak_length
           - if user.recent_monday_streak_dates_string
             .stat-label.stat-label__primary= user.recent_monday_streak_dates_string
-      .stat-group
-        .heading In #{Date.current.year}
-        .ytd-stats
-          .secondary-stats
-            .secondary-stat-container
-              .stat.stat__secondary= user.ytd_monday_miles
-              .stat-label.stat-label__secondary miles
-            .secondary-stat-container
-              .stat.stat__secondary= user.ytd_monday_feet_elevation_gain
-              .stat-label.stat-label__secondary feet elev.
-            .secondary-stat-container
-              .stat.stat__secondary= user.ytd_monday_hours
-              .stat-label.stat-label__secondary hours
-          .primary-stat-container.primary-stat-container__ytd
-            .stat.stat__primary= user.ytd_monday_activities_count
-            .stat-label.stat-label__primary activities
 
   %activities(:request-url="'#{user_monday_activities_path(user.slug)}'"
               :year-options="#{user.monday_activities_year_options_json}")
