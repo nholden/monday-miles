@@ -77,4 +77,9 @@ a {
   align-items: center;
   background-color: $grey-dark;
   height: 120px;
+  color: $white;
+
+  div {
+    padding: 0 30px;
+  }
 }
