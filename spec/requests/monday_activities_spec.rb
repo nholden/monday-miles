@@ -28,9 +28,17 @@ RSpec.describe "user monday activities request" do
 
   it "fetches JSON with activity data for current year" do
     get user_monday_activities_path(user.slug), as: :json
+
+    summary = response.parsed_body['summary']
     activities = response.parsed_body['activities']
 
     expect(response.status).to eql 200
+
+    expect(summary['activityCount']).to eql 2
+    expect(summary['miles']).to eql '9.3'
+    expect(summary['feetElev']).to eql '246'
+    expect(summary['hours']).to eql '1.2'
+
     expect(activities.length).to eql 2
     expect(activities.first['name']).to eql 'Great Monday 5k'
     expect(activities.first['map']).to be_present
@@ -42,9 +50,17 @@ RSpec.describe "user monday activities request" do
 
   it "fetches JSON with activity data for previous year" do
     get user_monday_activities_path(user.slug, year: 2017), as: :json
+
+    summary = response.parsed_body['summary']
     activities = response.parsed_body['activities']
 
     expect(response.status).to eql 200
+
+    expect(summary['activityCount']).to eql 1
+    expect(summary['miles']).to eql '12.4'
+    expect(summary['feetElev']).to eql '246'
+    expect(summary['hours']).to eql '1.7'
+
     expect(activities.length).to eql 1
     expect(activities.first['name']).to eql 'Decent Monday 20k'
     expect(activities.first['map']).to be_present

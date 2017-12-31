@@ -8,12 +8,17 @@
       .loading-indicator
         i(class="fa fa-spinner fa-pulse fa-fw")
         span Loading...
-    activity(
-      v-show="!loading"
-      v-for="activity in activities"
-      :activity="activity"
-      :key="activity.id"
-    )
+    .result(v-show="!loading")
+      .year-summary
+        .stat {{summary.activityCount}} activities
+        .stat {{summary.miles}} miles
+        .stat {{summary.feetElev}} feet elev.
+        .stat {{summary.hours}} hours
+      activity(
+        v-for="activity in activities"
+        :activity="activity"
+        :key="activity.id"
+      )
 </template>
 
 <script lang="coffee">
@@ -28,6 +33,7 @@ export default
 
   data: ->
     year: @yearOptions[0]
+    summary: {}
     activities: []
     loading: false
 
@@ -42,7 +48,9 @@ export default
       xhr = new XMLHttpRequest()
       xhr.open('GET', "#{@requestUrl}?year=#{@year}")
       xhr.onload = =>
-        @activities = JSON.parse(xhr.responseText).activities
+        parsedResponse = JSON.parse(xhr.responseText)
+        @summary = parsedResponse.summary
+        @activities = parsedResponse.activities
         setTimeout((=> @loading = false), 1000)
       xhr.send()
 
