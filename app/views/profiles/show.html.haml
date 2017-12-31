@@ -30,4 +30,5 @@
             .stat.stat__primary= user.ytd_monday_activities_count
             .stat-label.stat-label__primary activities
 
-  %activities(:request-url="'#{user_monday_activities_path(user.slug)}'")
+  %activities(:request-url="'#{user_monday_activities_path(user.slug)}'"
+              :year-options="#{user.monday_activities_year_options_json}")

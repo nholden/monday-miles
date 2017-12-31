@@ -1,42 +1,50 @@
 <template lang="pug">
   .activities
-    .container(v-infinite-scroll="loadMore")
-      activity(
-        v-for="activity in activities"
-        v-bind:activity="activity"
-        v-bind:key="activity.id"
-      )
-    .loader
-      .loading-indicator(v-if="loading")
+    .year-selector
+      | Showing activities from&nbsp;
+      select(v-model="year")
+        option(v-for="yearOption in yearOptions" :value="yearOption") {{yearOption}}
+    .loader(v-show="loading")
+      .loading-indicator
         i(class="fa fa-spinner fa-pulse fa-fw")
         span Loading...
-      .loading-link(v-else)
-        a(v-on:click.prevent="loadMore" href='#') Load more
+    activity(
+      v-show="!loading"
+      v-for="activity in activities"
+      :activity="activity"
+      :key="activity.id"
+    )
 </template>
 
 <script lang="coffee">
-import infiniteScroll from 'vue-infinite-scroll'
 import Activity from 'Activity.vue'
 
 export default
   props:
     requestUrl:
       required: true
+    yearOptions:
+      required: true
+
   data: ->
-    page: 1
+    year: @yearOptions[0]
     activities: []
     loading: false
-  mounted: -> @loadMore()
+
+  mounted: -> @loadActivities()
+
+  watch:
+    year: -> @loadActivities()
+
   methods:
-    loadMore: ->
+    loadActivities: ->
       @loading = true
       xhr = new XMLHttpRequest()
-      xhr.open('GET', "#{@requestUrl}?page=#{@page}")
+      xhr.open('GET', "#{@requestUrl}?year=#{@year}")
       xhr.onload = =>
-        @activities = @activities.concat(JSON.parse(xhr.responseText))
-        @loading = false
+        @activities = JSON.parse(xhr.responseText)
+        setTimeout((=> @loading = false), 1000)
       xhr.send()
-      @page += 1
+
   components: { Activity }
-  directives: { infiniteScroll }
 </script>

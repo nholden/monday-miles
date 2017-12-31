@@ -15,6 +15,10 @@ class UserDecorator < Draper::Decorator
     "#{h.l(object.recent_monday_streak_started)} to #{h.l(object.recent_monday_streak_ended)}"
   end
 
+  def monday_activities_year_options_json
+    object.monday_activities.pluck(:start_time).map(&:year).uniq.to_json
+  end
+
   def ytd_monday_miles
     monday_miles_in_year(Time.current.year)
   end
