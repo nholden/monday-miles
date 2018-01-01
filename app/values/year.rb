@@ -16,7 +16,7 @@ class Year < Struct.new(:year)
   end
 
   def days
-    Date.new(year)..Date.new(year + 1)
+    Date.new(year)...Date.new(year + 1)
   end
 
 end
