@@ -12,6 +12,9 @@ class ActivityDecorator < Draper::Decorator
       miles: miles,
       feetElev: feet_elevation_gain,
       duration: duration,
+      day: object.start_time.day,
+      month: object.start_time.month,
+      year: object.start_time.year,
     }
   end
 

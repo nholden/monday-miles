@@ -50,6 +50,10 @@ RSpec.describe "user monday activities request" do
     expect(activities.first['feetElev']).to eql '82'
     expect(activities.first['duration']).to eql '20:00'
     expect(activities.first['stravaUrl']).to eql 'https://www.strava.com/activities/123'
+    expect(activities.first['date']).to eql 'Jan. 15, 2018'
+    expect(activities.first['day']).to eql 15
+    expect(activities.first['month']).to eql 1
+    expect(activities.first['year']).to eql 2018
   end
 
   it "fetches JSON with activity data for previous year" do
