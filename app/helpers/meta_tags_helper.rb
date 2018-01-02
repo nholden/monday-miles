@@ -1,5 +1,21 @@
 module MetaTagsHelper
 
+  def set_title(title)
+    @title = title
+  end
+
+  def title
+    @title || 'Monday Miles'
+  end
+
+  def set_meta_description(description)
+    @meta_description = description
+  end
+
+  def meta_description
+    @meta_description || 'Mondays are hard. Celebrate your Monday Strava finishes.'
+  end
+
   def set_twitter_card_title(title)
     @twitter_card_title = title
   end
