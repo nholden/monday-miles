@@ -10,7 +10,10 @@
         span Loading...
     .result(v-show="!loading")
       .graph
-        svg(width="100%" viewBox="0 0 64 19")
+        svg(
+          width="100%"
+          :viewBox="'0 0 64 ' + graphHeight"
+        )
           rect(
             v-for="(monday, index) in mondays"
             v-tippy=""
@@ -20,7 +23,7 @@
             :class="{ 'day--completed': mondayHasCompletedActivity(monday), 'day--selected': selectedMonday == monday }"
             :title="monday.display"
             :x="(index % 13) * 5"
-            :y="Math.floor(index/13) * 5"
+            :y="mondayVerticalGraphPosition(index)"
             width="4"
             height="4"
           )
@@ -61,6 +64,13 @@ export default
   watch:
     year: -> @loadActivities()
 
+  computed:
+    graphHeight: ->
+      if @mondays.length > 0
+        @mondayVerticalGraphPosition(@mondays.length - 1) + 4
+      else
+        0
+
   methods:
     loadActivities: ->
       @loading = true
@@ -77,10 +87,9 @@ export default
       @activitiesCompletedOnMonday(monday).length > 0
     activitiesCompletedOnMonday: (monday) ->
       _.filter(@activities, { year: monday.year, month: monday.month, day: monday.day })
+    mondayVerticalGraphPosition: (index) -> Math.floor(index/13) * 5
     showActivity: (activity) ->
       _.isNil(@selectedMonday) || @activitiesCompletedOnMonday(@selectedMonday).includes(activity)
-
-
 
   components: { Activity }
 </script>
