@@ -33,8 +33,7 @@
         .stat {{summary.feetElev}} feet elev.
         .stat {{summary.hours}} hours
       activity(
-        v-for="activity in activities"
-        v-show="showActivity(activity)"
+        v-for="activity in filteredActivities"
         :activity="activity"
         :key="activity.id"
       )
@@ -70,6 +69,11 @@ export default
         @mondayVerticalGraphPosition(@mondays.length - 1) + 4
       else
         0
+    filteredActivities: ->
+      if _.isNil(@selectedMonday)
+        @activities
+      else
+        @activitiesCompletedOnMonday(@selectedMonday)
 
   methods:
     loadActivities: ->
@@ -88,8 +92,6 @@ export default
     activitiesCompletedOnMonday: (monday) ->
       _.filter(@activities, { year: monday.year, month: monday.month, day: monday.day })
     mondayVerticalGraphPosition: (index) -> Math.floor(index/13) * 5
-    showActivity: (activity) ->
-      _.isNil(@selectedMonday) || @activitiesCompletedOnMonday(@selectedMonday).includes(activity)
 
   components: { Activity }
 </script>
