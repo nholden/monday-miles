@@ -3,6 +3,10 @@
   %head
     %title Monday Miles
     %meta{ name: 'viewport', content: 'width=device-width, initial-scale=1.0' }
+    %meta{ name: 'twitter:card', content: 'summary' }
+    %meta{ name: 'twitter:title', content: twitter_card_title }
+    %meta{ name: 'twitter:description', content: twitter_card_description }
+    %meta{ name: 'twitter:image', content: twitter_card_image }
     = csrf_meta_tags
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
