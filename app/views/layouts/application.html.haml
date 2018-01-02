@@ -1,6 +1,9 @@
 !!!
 %html
   %head
+    - if ENV['GOOGLE_ANALYTICS_TRACKING_ID'].present?
+      = render 'layouts/google_analytics'
+
     %title= title
     %meta{ name: 'viewport', content: 'width=device-width, initial-scale=1.0' }
     %meta{ name: 'description', content: meta_description }
