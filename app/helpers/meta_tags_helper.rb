@@ -37,7 +37,7 @@ module MetaTagsHelper
   end
 
   def twitter_card_image
-    @twitter_card_image || 'http://mondaymiles.com/apple-touch-icon.png'
+    @twitter_card_image || 'http://www.mondaymiles.com/apple-touch-icon.png'
   end
 
 end
