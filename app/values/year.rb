@@ -1,12 +1,14 @@
 class Year < Struct.new(:year)
 
-  def mondays_by_month
-    Date::ABBR_MONTHNAMES.map.with_index do |name, index|
+  def mondays_data
+    mondays.map do |monday|
       {
-        name: name,
-        mondays: mondays.select { |monday| monday.month == index }.map(&:day)
+        year: monday.year,
+        month: monday.month,
+        day: monday.day,
+        display: I18n.l(monday),
       }
-    end.last(12)
+    end
   end
 
   private

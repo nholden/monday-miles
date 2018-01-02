@@ -3699,6 +3699,10 @@ pleeease-filters@^4.0.0:
     onecolor "^3.0.4"
     postcss "^6.0.1"
 
+popper.js@^1.12.9:
+  version "1.12.9"
+  resolved "https://registry.yarnpkg.com/popper.js/-/popper.js-1.12.9.tgz#0dfbc2dff96c451bb332edcfcfaaf566d331d5b3"
+
 portfinder@^1.0.9:
   version "1.0.13"
   resolved "https://registry.yarnpkg.com/portfinder/-/portfinder-1.0.13.tgz#bb32ecd87c27104ae6ee44b5a3ccbf0ebb1aede9"
@@ -5292,6 +5296,12 @@ tiny-emitter@2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/tiny-emitter/-/tiny-emitter-2.0.0.tgz#bad327adb1804b42a231afa741532bd884cd09ad"
 
+tippy.js@^2.0.8:
+  version "2.0.8"
+  resolved "https://registry.yarnpkg.com/tippy.js/-/tippy.js-2.0.8.tgz#7f3e8985efa1a5052d692988b55b44afa8f1dc39"
+  dependencies:
+    popper.js "^1.12.9"
+
 to-arraybuffer@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/to-arraybuffer/-/to-arraybuffer-1.0.1.tgz#7d229b1fcc637e466ca081180836a7aabff83f43"
@@ -5526,6 +5536,13 @@ vue-template-compiler@^2.5.6:
 vue-template-es2015-compiler@^1.6.0:
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/vue-template-es2015-compiler/-/vue-template-es2015-compiler-1.6.0.tgz#dc42697133302ce3017524356a6c61b7b69b4a18"
+
+vue-tippy@^2.0.5:
+  version "2.0.5"
+  resolved "https://registry.yarnpkg.com/vue-tippy/-/vue-tippy-2.0.5.tgz#932cf55724432cc20de94337192adf7995527d8f"
+  dependencies:
+    popper.js "^1.12.9"
+    tippy.js "^2.0.8"
 
 vue-turbolinks@^2.0.0:
   version "2.0.0"

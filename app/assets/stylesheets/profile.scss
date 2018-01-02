@@ -110,12 +110,33 @@
     }
 
     .result {
+      .graph {
+        .day {
+          fill: $grey-light;
+          transition: fill 0.1s linear;
+
+          &:hover {
+            fill: $red-lightest;
+          }
+
+          &--completed {
+            fill: $green-medium;
+
+            &:hover {
+              fill: $green-dark;
+              cursor: pointer;
+            }
+          }
+        }
+      }
+
       .year-summary {
         display: flex;
         flex-wrap: wrap;
         align-items: center;
         justify-content: space-between;
         margin: -4px -15px;
+        padding-top: 15px;
         padding-bottom: 30px;
 
         .stat {

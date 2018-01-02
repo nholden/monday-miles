@@ -1,4 +1,4 @@
 en:
   date:
     formats:
-      default: "%b. %e, %Y"
+      default: "%b. %-e, %Y"

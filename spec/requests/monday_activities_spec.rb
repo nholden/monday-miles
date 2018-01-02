@@ -30,7 +30,7 @@ RSpec.describe "user monday activities request" do
     get user_monday_activities_path(user.slug), as: :json
 
     summary = response.parsed_body['summary']
-    months = response.parsed_body['months']
+    mondays = response.parsed_body['mondays']
     activities = response.parsed_body['activities']
 
     expect(response.status).to eql 200
@@ -40,8 +40,11 @@ RSpec.describe "user monday activities request" do
     expect(summary['feetElev']).to eql '246'
     expect(summary['hours']).to eql '1.2'
 
-    expect(months.first['name']).to eql 'Jan'
-    expect(months.first['mondays']).to match_array([1, 8, 15, 22, 29])
+    expect(mondays.count).to eql 53
+    expect(mondays.first['year']).to eql 2018
+    expect(mondays.first['month']).to eql 1
+    expect(mondays.first['day']).to eql 1
+    expect(mondays.first['display']).to eql "Jan. 1, 2018"
 
     expect(activities.length).to eql 2
     expect(activities.first['name']).to eql 'Great Monday 5k'

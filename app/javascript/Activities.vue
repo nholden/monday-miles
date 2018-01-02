@@ -1,7 +1,7 @@
 <template lang="pug">
   .activities
     .year-selector
-      | Showing activities from&nbsp;
+      | Monday activities in&nbsp;
       select(v-model="year")
         option(v-for="yearOption in yearOptions" :value="yearOption") {{yearOption}}
     .loader(v-show="loading")
@@ -9,6 +9,22 @@
         i(class="fa fa-spinner fa-pulse fa-fw")
         span Loading...
     .result(v-show="!loading")
+      .graph
+        svg(width="100%" viewBox="0 0 64 19")
+          a(
+            v-for="(monday, index) in mondays"
+            :xlink:href="mondayLinkTarget(monday)"
+          )
+            rect(
+              v-tippy=""
+              class="day"
+              :class="{ 'day--completed': mondayHasCompletedActivity(monday) }"
+              :title="monday.display"
+              :x="(index % 13) * 5"
+              :y="Math.floor(index/13) * 5"
+              width="4"
+              height="4"
+            )
       .year-summary
         .stat {{summary.activityCount}} activities
         .stat {{summary.miles}} miles
@@ -18,11 +34,13 @@
         v-for="activity in activities"
         :activity="activity"
         :key="activity.id"
+        :id="activity.id"
       )
 </template>
 
 <script lang="coffee">
 import Activity from 'Activity.vue'
+import _ from 'lodash'
 
 export default
   props:
@@ -35,6 +53,7 @@ export default
     year: @yearOptions[0]
     summary: {}
     activities: []
+    mondays: []
     loading: false
 
   mounted: -> @loadActivities()
@@ -51,8 +70,17 @@ export default
         parsedResponse = JSON.parse(xhr.responseText)
         @summary = parsedResponse.summary
         @activities = parsedResponse.activities
+        @mondays = parsedResponse.mondays
         setTimeout((=> @loading = false), 1000)
       xhr.send()
+    mondayHasCompletedActivity: (monday) ->
+      @activitiesCompletedOnMonday(monday).length > 0
+    activitiesCompletedOnMonday: (monday) ->
+      _.filter(@activities, { year: monday.year, month: monday.month, day: monday.day })
+    mondayLinkTarget: (monday) ->
+      if @mondayHasCompletedActivity(monday)
+        activity = @activitiesCompletedOnMonday(monday)[0]
+        "##{activity.id}"
 
   components: { Activity }
 </script>
