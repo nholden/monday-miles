@@ -17,6 +17,10 @@ class MondayStreak
     consecutive_mondays.last
   end
 
+  def current?
+    ended == Date.current.beginning_of_week(:monday)
+  end
+
   private
 
   def consecutive_mondays

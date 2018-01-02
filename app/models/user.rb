@@ -3,7 +3,7 @@ class User < ApplicationRecord
   has_many :activities
   has_many :monday_activities, -> { monday }, class_name: 'Activity'
 
-  delegate :length, :started, :ended,
+  delegate :length, :started, :ended, :current?,
     to: :recent_monday_streak, prefix: true
 
   def recent_monday_streak

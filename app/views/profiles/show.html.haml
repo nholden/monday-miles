@@ -8,7 +8,7 @@
         .location= user.location
     .stats
       .stat-group
-        .heading Streak
+        .heading= user.recent_monday_streak_title
         .primary-stat-container
           .stat.stat__primary= user.recent_monday_streak_length
           - if user.recent_monday_streak_dates_string
