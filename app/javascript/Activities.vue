@@ -11,20 +11,19 @@
     .result(v-show="!loading")
       .graph
         svg(width="100%" viewBox="0 0 64 19")
-          a(
+          rect(
             v-for="(monday, index) in mondays"
-            :xlink:href="mondayLinkTarget(monday)"
+            v-tippy=""
+            v-on:focus="selectedMonday = monday"
+            v-on:blur="selectedMonday = null"
+            class="day"
+            :class="{ 'day--completed': mondayHasCompletedActivity(monday), 'day--selected': selectedMonday == monday }"
+            :title="monday.display"
+            :x="(index % 13) * 5"
+            :y="Math.floor(index/13) * 5"
+            width="4"
+            height="4"
           )
-            rect(
-              v-tippy=""
-              class="day"
-              :class="{ 'day--completed': mondayHasCompletedActivity(monday) }"
-              :title="monday.display"
-              :x="(index % 13) * 5"
-              :y="Math.floor(index/13) * 5"
-              width="4"
-              height="4"
-            )
       .year-summary
         .stat {{summary.activityCount}} activities
         .stat {{summary.miles}} miles
@@ -32,9 +31,9 @@
         .stat {{summary.hours}} hours
       activity(
         v-for="activity in activities"
+        v-show="showActivity(activity)"
         :activity="activity"
         :key="activity.id"
-        :id="activity.id"
       )
 </template>
 
@@ -54,6 +53,7 @@ export default
     summary: {}
     activities: []
     mondays: []
+    selectedMonday: null
     loading: false
 
   mounted: -> @loadActivities()
@@ -77,10 +77,10 @@ export default
       @activitiesCompletedOnMonday(monday).length > 0
     activitiesCompletedOnMonday: (monday) ->
       _.filter(@activities, { year: monday.year, month: monday.month, day: monday.day })
-    mondayLinkTarget: (monday) ->
-      if @mondayHasCompletedActivity(monday)
-        activity = @activitiesCompletedOnMonday(monday)[0]
-        "##{activity.id}"
+    showActivity: (activity) ->
+      _.isNil(@selectedMonday) || @activitiesCompletedOnMonday(@selectedMonday).includes(activity)
+
+
 
   components: { Activity }
 </script>

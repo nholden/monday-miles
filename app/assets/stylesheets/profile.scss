@@ -114,8 +114,9 @@
         .day {
           fill: $grey-light;
           transition: fill 0.1s linear;
+          outline: none;
 
-          &:hover {
+          &:hover, &--selected {
             fill: $red-lightest;
           }
 
@@ -125,6 +126,10 @@
             &:hover {
               fill: $green-dark;
               cursor: pointer;
+            }
+
+            &.day--selected {
+              fill: $green-dark;
             }
           }
         }

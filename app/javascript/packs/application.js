@@ -5,7 +5,7 @@ import Activities from '../Activities.vue'
 import LoadingVideo from '../LoadingVideo.vue'
 
 Vue.use(TurbolinksAdapter)
-Vue.use(VueTippy)
+Vue.use(VueTippy, { arrow: true })
 
 document.addEventListener('turbolinks:load', () => {
   const app = new Vue({
