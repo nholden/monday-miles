@@ -22,6 +22,13 @@ RSpec.describe UserSlugGenerator do
 
       Then { result == 'meb-keflezighi-1' }
     end
+
+    context "when user name has spaces and non-letter characters" do
+      Given { generator.first_name = 'Meb Keflezighi' }
+      Given { generator.last_name = '🇺🇸' }
+
+      Then { result == 'meb-keflezighi' }
+    end
   end
 
 end
