@@ -7,7 +7,7 @@ class UserDecorator < Draper::Decorator
   end
 
   def location
-    "#{object.city}, #{object.state}"
+    [object.city, object.state, object.country].select(&:present?).uniq.first(2).join(', ')
   end
 
   def recent_monday_streak_title
