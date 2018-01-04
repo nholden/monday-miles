@@ -5,7 +5,7 @@ class MondayActivitiesController < ApplicationController
 
   def show
     render json: user.monday_activities.in_year(year).decorate.vue_data.merge(
-      { mondays: Year.new(year).mondays_data }
+      { mondays: Year.new(year).mondays_data(on_or_before_date: Date.tomorrow) }
     )
   end
 
