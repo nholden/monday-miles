@@ -8,13 +8,13 @@ class ActivityDecorator < Draper::Decorator
       stravaUrl: strava_url,
       name: object.name,
       map: map,
-      date: h.l(object.start_time.to_date),
+      date: h.l(object.local_start_date),
       miles: miles,
       feetElev: feet_elevation_gain,
       duration: duration,
-      day: object.start_time.day,
-      month: object.start_time.month,
-      year: object.start_time.year,
+      day: object.local_start_date.day,
+      month: object.local_start_date.month,
+      year: object.local_start_date.year,
     }
   end
 
