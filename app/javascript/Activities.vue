@@ -28,7 +28,7 @@
             height="4"
           )
       .year-summary
-        .stat {{summary.activityCount}} activities
+        .stat {{summary.activityCount}} {{'activity' | pluralize(summary.activityCount)}}
         .stat {{summary.miles}} miles
         .stat {{summary.feetElev}} feet elev.
         .stat {{summary.hours}} hours
@@ -59,6 +59,15 @@ export default
     loading: false
 
   mounted: -> @loadActivities()
+
+  filters:
+    pluralize: (word, count) ->
+      if count == 1
+        word
+      else
+        switch word.slice(-1)
+          when 'y' then "#{word.slice(0, -1)}ies"
+          else "#{word}s"
 
   watch:
     year: -> @loadActivities()
