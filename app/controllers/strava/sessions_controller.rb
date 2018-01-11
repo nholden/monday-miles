@@ -4,11 +4,12 @@ module Strava
     def create
       if auth_response.authenticated?
         user = User.from_strava_athlete(auth_response.athlete)
-        user.strava_access_token = auth_response.access_token
         redirect_path = user.new_record? ? page_path('loading') : user_profile_path(user.slug)
-        user.save! if user.changed?
-        StravaActivityWorker.perform_async(user.id, user.last_signed_in_at.try(:iso8601), Time.current.iso8601)
-        user.update! last_signed_in_at: Time.current
+        fetch_activities_since = user.last_signed_in_at
+        user.strava_access_token = auth_response.access_token
+        user.last_signed_in_at = Time.current
+        user.save!
+        StravaActivityWorker.perform_async(user.id, fetch_activities_since.try(:iso8601), Time.current.iso8601)
         session[:current_user_id] = user.id
         redirect_to redirect_path
       else
