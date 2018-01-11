@@ -38,32 +38,36 @@ RSpec.describe "authentication" do
       context "when the user already exists" do
         Given!(:existing_user) { FactoryGirl.create(:user,
                                                     strava_id: 227615,
-                                                    strava_access_token: strava_access_token,
-                                                    first_name: 'Jane',
+                                                    strava_access_token: existing_strava_access_token,
+                                                    large_profile_image_url: existing_large_profile_image_url,
                                                     last_signed_in_at: 2.days.ago) }
+        Given(:existing_strava_access_token) { '83ebeabdec09f6670863766f792ead24d61fe3f9' }
+        Given(:existing_large_profile_image_url) { 'http://pics.com/227615/large.jpg' }
 
         When { existing_user.reload }
 
-        context "when the user's Strava access token is the same" do
-          Given(:strava_access_token) { '83ebeabdec09f6670863766f792ead24d61fe3f9' }
+        context "when the user's Strava data has stayed the same" do
           Given(:strava_activity_worker_args) { StravaActivityWorker.jobs.last['args'] }
           Given(:job_start_time) { strava_activity_worker_args[1] }
           Given(:job_end_time) { strava_activity_worker_args[2] }
 
-          Then { expect(page).to have_text 'Hi, Jane!' }
+          Then { expect(page).to have_current_path(user_profile_path(existing_user.slug)) }
           And { existing_user.last_signed_in_at == Time.current }
           And { existing_user.strava_access_token == '83ebeabdec09f6670863766f792ead24d61fe3f9' }
-          And { expect(page).to have_current_path(user_profile_path(existing_user.slug)) }
+          And { existing_user.large_profile_image_url == 'http://pics.com/227615/large.jpg' }
           And { StravaActivityWorker.jobs.size == 1 }
           And { job_start_time == 2.days.ago.iso8601 }
           And { job_end_time == Time.current.iso8601 }
         end
 
         context "when the user's Strava access token has changed" do
-          Given(:strava_access_token) { 'abc123' }
+          Given(:existing_strava_access_token) { 'abc123' }
+          Then { existing_user.strava_access_token == '83ebeabdec09f6670863766f792ead24d61fe3f9' }
+        end
 
-          Then { expect(page).to have_text 'Hi, Jane!' }
-          And { existing_user.strava_access_token == '83ebeabdec09f6670863766f792ead24d61fe3f9' }
+        context "when the user's profile photo URL has changed" do
+          Given(:existing_large_profile_image_url) { 'http://oldphotourl.com/old.jpg' }
+          Then { existing_user.large_profile_image_url == 'http://pics.com/227615/large.jpg' }
         end
       end
     end
