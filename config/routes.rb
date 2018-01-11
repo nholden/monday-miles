@@ -6,6 +6,10 @@ Rails.application.routes.draw do
     get '/auth/strava/callback', to: 'sessions#create'
   end
 
+  namespace :strava do
+    resource :webhook_callbacks, only: [:create]
+  end
+
   resource :session, only: [:destroy]
 
   resources :user, only: [], path: '/u', param: :slug do
