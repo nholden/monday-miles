@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   end
 
   namespace :strava do
-    resource :webhook_callbacks, only: [:create]
+    resource :webhook_callbacks, only: [:create, :show]
   end
 
   resource :session, only: [:destroy]
