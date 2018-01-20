@@ -47,17 +47,10 @@ RSpec.describe "authentication" do
         When { existing_user.reload }
 
         context "when the user's Strava data has stayed the same" do
-          Given(:worker_args) { StravaActivitiesInTimeRangeWorker.jobs.last['args'] }
-          Given(:job_start_time) { worker_args[1] }
-          Given(:job_end_time) { worker_args[2] }
-
           Then { expect(page).to have_current_path(user_profile_path(existing_user.slug)) }
           And { existing_user.last_signed_in_at == Time.current }
           And { existing_user.strava_access_token == '83ebeabdec09f6670863766f792ead24d61fe3f9' }
           And { existing_user.large_profile_image_url == 'http://pics.com/227615/large.jpg' }
-          And { StravaActivitiesInTimeRangeWorker.jobs.size == 1 }
-          And { job_start_time == 2.days.ago.iso8601 }
-          And { job_end_time == Time.current.iso8601 }
         end
 
         context "when the user's Strava access token has changed" do
