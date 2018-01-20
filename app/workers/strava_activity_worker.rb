@@ -1,4 +1,4 @@
-class NewStravaActivityWorker
+class StravaActivityWorker
 
   include Sidekiq::Worker
 
@@ -10,7 +10,7 @@ class NewStravaActivityWorker
       access_token: user.strava_access_token
     )
 
-    ActivityCreator.create_from_strava_activity!(strava_activity, user: user)
+    Activity.from_strava_activity(strava_activity, user: user).save!
   end
 
 end

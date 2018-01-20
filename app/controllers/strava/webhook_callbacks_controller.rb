@@ -6,8 +6,8 @@ module Strava
     def create
       event = Strava::WebhookEvent.new(params)
 
-      if event.created_activity?
-        NewStravaActivityWorker.perform_async(event.strava_athlete_id, event.strava_activity_id)
+      if event.created_or_updated_activity?
+        StravaActivityWorker.perform_async(event.strava_athlete_id, event.strava_activity_id)
       end
 
       render plain: 'success', status: 200

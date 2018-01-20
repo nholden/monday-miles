@@ -11,7 +11,7 @@ class StravaActivitiesInTimeRangeWorker
       if Activity.where(strava_id: strava_activity.id).any?
         logger.info "[StravaActivitiesInTimeRangeWorker] Skipping Strava activity #{strava_activity.id}, which already exists as an Activity"
       else
-        ActivityCreator.create_from_strava_activity!(strava_activity, user: user)
+        Activity.from_strava_activity(strava_activity, user: user).save!
       end
     end
   end

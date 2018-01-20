@@ -1,0 +1,11 @@
+{
+  "aspect_type": "update",
+  "event_time": 1516421116,
+  "object_id": 123456789,
+  "object_type": "activity",
+  "owner_id": 12345,
+  "subscription_id": 11111,
+  "updates": {
+    "title": "This is an updated activity title!"
+  }
+}

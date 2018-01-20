@@ -6,8 +6,9 @@ module Strava
     UPDATE_ASPECT_TYPE = 'update'.freeze
     DELETE_ASPECT_TYPE = 'delete'.freeze
 
-    def created_activity?
-      strava_object_type == ACTIVITY_STRAVA_OBJECT_TYPE && aspect_type == CREATE_ASPECT_TYPE
+    def created_or_updated_activity?
+      strava_object_type == ACTIVITY_STRAVA_OBJECT_TYPE &&
+        aspect_type.in?([CREATE_ASPECT_TYPE, UPDATE_ASPECT_TYPE])
     end
 
     def strava_athlete_id
