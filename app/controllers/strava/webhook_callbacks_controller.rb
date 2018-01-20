@@ -8,6 +8,8 @@ module Strava
 
       if event.created_or_updated_activity?
         StravaActivityWorker.perform_async(event.strava_athlete_id, event.strava_activity_id)
+      elsif event.deleted_activity?
+        DeletedStravaActivityWorker.perform_async(event.strava_athlete_id, event.strava_activity_id)
       end
 
       render plain: 'success', status: 200

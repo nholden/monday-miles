@@ -1,0 +1,47 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://www.strava.com/api/v3/activities/1363879553
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Authorization:
+      - Bearer faket0k3n
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Cache-Control:
+      - no-cache, private
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Sat, 20 Jan 2018 19:27:53 GMT
+      Set-Cookie:
+      - _strava3_session=BAh7B0kiD3Nlc3Npb25faWQGOgZFVEkiJWQzZGNkNTU4MGE2MjRlZjk3MjA3NjhmZGYyNmExZjgwBjsAVEkiEGNsZWFyX2NsaWNrBjsARlQ%3D--036f57222d8f5c30d80e52a971fead1705a3ee3a;
+        domain=strava.com; path=/; HttpOnly
+      Status:
+      - 404 Not Found
+      X-Frame-Options:
+      - DENY
+      X-Ratelimit-Limit:
+      - '600,30000'
+      X-Ratelimit-Usage:
+      - '4,13'
+      X-Request-Id:
+      - 503edb84066f345004577249463f075a
+      X-Ua-Compatible:
+      - IE=Edge,chrome=1
+      Content-Length:
+      - '42'
+      Connection:
+      - keep-alive
+    body:
+      encoding: ASCII-8BIT
+      string: '{"message":"Record Not Found","errors":[]}'
+    http_version:
+  recorded_at: Sat, 20 Jan 2018 19:27:54 GMT
+recorded_with: VCR 3.0.3

@@ -86,5 +86,9 @@ module Strava
       Time.parse(data['start_date_local']).monday?
     end
 
+    def deleted?
+      data['message'] == 'Record Not Found'
+    end
+
   end
 end

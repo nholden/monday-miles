@@ -11,6 +11,10 @@ module Strava
         aspect_type.in?([CREATE_ASPECT_TYPE, UPDATE_ASPECT_TYPE])
     end
 
+    def deleted_activity?
+      strava_object_type == ACTIVITY_STRAVA_OBJECT_TYPE && aspect_type == DELETE_ASPECT_TYPE
+    end
+
     def strava_athlete_id
       owner_id if strava_object_type == ACTIVITY_STRAVA_OBJECT_TYPE
     end
