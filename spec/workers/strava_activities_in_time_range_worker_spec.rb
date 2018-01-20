@@ -1,10 +1,10 @@
 require 'rails_helper'
 
-RSpec.describe StravaActivityWorker do
+RSpec.describe StravaActivitiesInTimeRangeWorker do
 
   around { |example| travel_to(Time.iso8601('2017-10-14T00:00:00-07:00'), &example) }
 
-  Given(:worker) { StravaActivityWorker.new }
+  Given(:worker) { StravaActivitiesInTimeRangeWorker.new }
 
   describe "#perform" do
     Given(:user) { FactoryGirl.create(:user, strava_access_token: '00accesstoken00') }

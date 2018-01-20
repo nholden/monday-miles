@@ -1,4 +1,4 @@
-class StravaActivityWorker
+class StravaActivitiesInTimeRangeWorker
 
   include Sidekiq::Worker
 
@@ -9,7 +9,7 @@ class StravaActivityWorker
 
     athlete.activities(start_time: start_time, end_time: Time.parse(end_time_string)).map do |strava_activity|
       if Activity.where(strava_id: strava_activity.id).any?
-        logger.info "[StravaActivityWorker] Skipping Strava activity #{strava_activity.id}, which already exists as an Activity"
+        logger.info "[StravaActivitiesInTimeRangeWorker] Skipping Strava activity #{strava_activity.id}, which already exists as an Activity"
       else
         ActivityCreator.create_from_strava_activity!(strava_activity, user: user)
       end

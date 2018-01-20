@@ -9,7 +9,7 @@ module Strava
         user.strava_access_token = auth_response.access_token
         user.last_signed_in_at = Time.current
         user.save!
-        StravaActivityWorker.perform_async(user.id, fetch_activities_since.try(:iso8601), Time.current.iso8601)
+        StravaActivitiesInTimeRangeWorker.perform_async(user.id, fetch_activities_since.try(:iso8601), Time.current.iso8601)
         session[:current_user_id] = user.id
         redirect_to redirect_path
       else
