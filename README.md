@@ -24,6 +24,10 @@ webpack-dev-server
 
 Monday Miles should be accessible at http://localhost:3000 (or whichever port you specify in `.env`).
 
+## Strava Webhooks
+
+For activities to be created, updated, and deleted as users make changes in Strava, Monday Miles must have a Strava webhooks subscription in production. Use a tool like [Postman](https://www.getpostman.com/) and follow the instructions in the [Strava webhooks documentation](https://developers.strava.com/docs/webhooks/#subscriptions) to create a new subscription with the application’s Strava API credentials. Monday Miles’ webhooks callback URL is at `/strava/webhook_callbacks`.
+
 ## Testing
 ```
 bundle exec rake
