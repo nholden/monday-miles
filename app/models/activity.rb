@@ -4,6 +4,7 @@ class Activity < ApplicationRecord
 
   scope :monday, -> { where(monday: true).order(start_time: :desc) }
   scope :in_year, -> (year) { where(start_time: Date.new(year)...Date.new(year + 1)) }
+  scope :not_deleted, -> { where(deleted_at: nil) }
 
   def self.from_strava_activity(strava_activity, user:)
     (find_by_strava_id(strava_activity.id) || new).tap do |activity|
