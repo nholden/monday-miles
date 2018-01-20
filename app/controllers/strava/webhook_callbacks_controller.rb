@@ -4,6 +4,12 @@ module Strava
     skip_before_action :verify_authenticity_token
 
     def create
+      event = Strava::WebhookEvent.new(params)
+
+      if event.created_activity?
+        NewStravaActivityWorker.perform_async(event.strava_athlete_id, event.strava_activity_id)
+      end
+
       render plain: 'success', status: 200
     end
 
