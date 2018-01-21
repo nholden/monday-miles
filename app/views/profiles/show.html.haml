@@ -18,5 +18,9 @@
           - if user.recent_monday_streak_dates_string
             .stat-label.stat-label__primary= user.recent_monday_streak_dates_string
 
-  %activities(:request-url="'#{user_monday_activities_path(user.slug)}'"
-              :year-options="#{user.monday_activities_year_options_json}")
+  - if user.monday_activities.not_deleted.any?
+    %activities(:request-url="'#{user_monday_activities_path(user.slug)}'"
+                :year-options="#{user.monday_activities_year_options_json}")
+  - else
+    .activities
+      .missing No Monday activities found. Get moving!
