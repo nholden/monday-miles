@@ -52,6 +52,8 @@ GEM
     arel (9.0.0)
     bcrypt (3.1.11)
     bindex (0.5.0)
+    bootsnap (1.1.8)
+      msgpack (~> 1.0)
     builder (3.2.3)
     byebug (9.1.0)
     capybara (2.15.1)
@@ -142,6 +144,7 @@ GEM
     mini_mime (0.1.4)
     mini_portile2 (2.3.0)
     minitest (5.11.3)
+    msgpack (1.2.2)
     multi_json (1.12.2)
     multi_xml (0.6.0)
     multipart-post (2.0.0)
@@ -321,6 +324,7 @@ PLATFORMS
 
 DEPENDENCIES
   bcrypt (~> 3.1.7)
+  bootsnap
   byebug
   capybara
   coffee-rails (~> 4.2)

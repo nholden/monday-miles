@@ -30,6 +30,7 @@ gem 'memory_profiler'
 gem 'flamegraph'
 gem 'stackprof'
 gem 'webpacker', '~> 3.0'
+gem 'bootsnap', require: false
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.6'
