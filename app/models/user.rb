@@ -18,10 +18,10 @@ class User < ApplicationRecord
       user.country = strava_athlete.country
       user.gender = strava_athlete.gender
       user.email = strava_athlete.email
-      user.slug = UserSlugGenerator.new(
-                     first_name: strava_athlete.first_name,
-                     last_name: strava_athlete.last_name
-                   ).generate
+      user.slug ||= UserSlugGenerator.new(
+                      first_name: strava_athlete.first_name,
+                      last_name: strava_athlete.last_name
+                    ).generate
     end
   end
 

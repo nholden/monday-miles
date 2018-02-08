@@ -37,6 +37,7 @@ RSpec.describe "authentication" do
 
       context "when the user already exists" do
         Given!(:existing_user) { FactoryGirl.create(:user,
+                                                    slug: 'john-applestrava',
                                                     strava_id: 227615,
                                                     strava_access_token: existing_strava_access_token,
                                                     large_profile_image_url: existing_large_profile_image_url,
@@ -45,6 +46,8 @@ RSpec.describe "authentication" do
         Given(:existing_large_profile_image_url) { 'http://pics.com/227615/large.jpg' }
 
         When { existing_user.reload }
+
+        Invariant { existing_user.slug == 'john-applestrava' }
 
         context "when the user's Strava data has stayed the same" do
           Then { expect(page).to have_current_path(user_profile_path(existing_user.slug)) }
