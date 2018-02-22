@@ -8,11 +8,7 @@ class StravaActivitiesInTimeRangeWorker
     start_time = start_time_string.present? ? Time.parse(start_time_string) : nil
 
     athlete.activities(start_time: start_time, end_time: Time.parse(end_time_string)).map do |strava_activity|
-      if Activity.where(strava_id: strava_activity.id).any?
-        logger.info "[StravaActivitiesInTimeRangeWorker] Skipping Strava activity #{strava_activity.id}, which already exists as an Activity"
-      else
-        Activity.from_strava_activity(strava_activity, user: user).save!
-      end
+      Activity.from_strava_activity(strava_activity, user: user).save!
     end
   end
 

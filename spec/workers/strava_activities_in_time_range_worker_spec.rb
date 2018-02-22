@@ -25,8 +25,15 @@ RSpec.describe StravaActivitiesInTimeRangeWorker do
       end
 
       context "when one of the activities already exists in the database" do
-        Given { FactoryGirl.create(:activity, user: user, strava_id: 1228328056) }
+        Given!(:existing_activity) { FactoryGirl.create(:activity,
+                                                        user: user,
+                                                        strava_id: 1228328056,
+                                                        name: 'Old activity name') }
+
+        When { existing_activity.reload }
+
         Then { user_activities.count == 5 }
+        And { existing_activity.name == 'Warmup for hockey night in San Diego #letsgogulls #protectthenest' }
       end
     end
 
