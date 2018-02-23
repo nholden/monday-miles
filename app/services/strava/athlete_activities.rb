@@ -31,11 +31,9 @@ module Strava
     private
 
     def activity_data_for_page(page)
-      response = Excon.get('https://www.strava.com/api/v3/athlete/activities',
-                           headers: { 'Authorization' => "Bearer #{@access_token}" },
-                           query: { after: @start_time.to_i, before: @end_time.to_i, per_page: MAX_ACTIVITIES_PER_API_CALL, page: page })
-
-      JSON.parse(response.body)
+      API.get(path: 'athlete/activities',
+              access_token: @access_token,
+              query: { after: @start_time.to_i, before: @end_time.to_i, per_page: MAX_ACTIVITIES_PER_API_CALL, page: page })
     end
 
   end

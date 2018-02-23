@@ -1,0 +1,40 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://www.strava.com/api/v3/activities/10707546
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Authorization:
+      - Bearer invalid-token
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      Cache-Control:
+      - no-cache, private
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Fri, 23 Feb 2018 02:00:11 GMT
+      Status:
+      - 401 Unauthorized
+      X-Frame-Options:
+      - DENY
+      X-Request-Id:
+      - 420487bf4e5c1abfc364a748b7d6b157
+      X-Ua-Compatible:
+      - IE=Edge,chrome=1
+      Content-Length:
+      - '99'
+      Connection:
+      - keep-alive
+    body:
+      encoding: ASCII-8BIT
+      string: '{"message":"Authorization Error","errors":[{"resource":"Application","field":"","code":"invalid"}]}'
+    http_version: 
+  recorded_at: Fri, 23 Feb 2018 02:00:11 GMT
+recorded_with: VCR 3.0.3

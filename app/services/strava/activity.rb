@@ -2,12 +2,12 @@ module Strava
   class Activity < Struct.new(:data)
 
     def self.fetch(strava_activity_id:, access_token:)
-      response = Excon.get(
-        "https://www.strava.com/api/v3/activities/#{strava_activity_id}",
-        headers: { 'Authorization' => "Bearer #{access_token}" }
+      response = API.get(
+        path: "activities/#{strava_activity_id}",
+        access_token: access_token
       )
 
-      new(JSON.parse(response.body))
+      new(response)
     end
 
     def id
