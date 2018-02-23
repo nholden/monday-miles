@@ -34,6 +34,9 @@ module Strava
       API.get(path: 'athlete/activities',
               access_token: @access_token,
               query: { after: @start_time.to_i, before: @end_time.to_i, per_page: MAX_ACTIVITIES_PER_API_CALL, page: page })
+    rescue API::AuthorizationError => ex
+      Rails.logger.info "[Strava::AthleteActivities] Rescued Strava::API::AuthorizationError: #{ex.message}. Did the user revoke access?"
+      []
     end
 
   end
