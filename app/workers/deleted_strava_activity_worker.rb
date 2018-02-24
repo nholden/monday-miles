@@ -11,7 +11,11 @@ class DeletedStravaActivityWorker
     )
 
     if strava_activity.deleted?
-      Activity.find_by_strava_id!(strava_activity_id).update! deleted_at: Time.current
+      if activity = Activity.find_by_strava_id(strava_activity_id)
+        activity.update! deleted_at: Time.current
+      else
+        logger.info "[DeletedStravaActivityWorker] Activity with strava ID #{strava_activity_id} not found. Not deleting Activity record."
+      end
     else
       raise 'Tried to delete non-deleted Strava activity'
     end

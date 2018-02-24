@@ -11,12 +11,16 @@ RSpec.describe DeletedStravaActivityWorker do
 
     around { |example| VCR.use_cassette('deleted_strava_activity', &example) }
 
-    When { worker.perform(strava_athlete_id, strava_activity_id) }
+    When(:result) { worker.perform(strava_athlete_id, strava_activity_id) }
 
     context "it updates deleted_at for an existing activity" do
       Given!(:activity) { FactoryGirl.create(:activity, strava_id: strava_activity_id, user: user, deleted_at: nil) }
       When { activity.reload }
       Then { activity.deleted_at.present? }
+    end
+
+    context "it ignores the webhook if no matching activity exists" do
+      Then { expect(result).to_not have_raised }
     end
   end
 
