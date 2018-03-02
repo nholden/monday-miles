@@ -31,6 +31,7 @@ gem 'flamegraph'
 gem 'stackprof'
 gem 'webpacker', '~> 3.0'
 gem 'bootsnap', require: false
+gem 'secure_headers'
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.6'
