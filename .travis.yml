@@ -3,3 +3,5 @@ rvm:
   - 2.5.0
 install: ./bin/travis-ci-install
 script: ./bin/travis-ci-script
+notifications:
+  email: false
