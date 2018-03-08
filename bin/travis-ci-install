@@ -1,4 +1,3 @@
 #!/bin/bash
 
-bundle install
-bundle exec rake db:schema:load
+bundle exec rake db:setup
