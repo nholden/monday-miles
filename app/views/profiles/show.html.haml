@@ -1,12 +1,12 @@
 - set_title("#{user.full_name} on Monday Miles")
 - set_twitter_card_title("#{user.full_name} on Monday Miles")
-- set_twitter_card_image(user.large_profile_image_url)
+- set_twitter_card_image(user.profile_or_placeholder_image_url)
 
 .profile
 
   .summary
     .user
-      .photo= image_tag user.large_profile_image_url
+      .photo= image_tag user.profile_or_placeholder_image_url
       .details
         .name= user.full_name
         .location= user.location

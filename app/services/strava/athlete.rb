@@ -23,11 +23,11 @@ module Strava
     end
 
     def medium_profile_image_url
-      data['profile_medium']
+      data['profile_medium'] if data['profile_medium'] =~ /^https?:\/\//
     end
 
     def large_profile_image_url
-      data['profile']
+      data['profile'] if data['profile'] =~ /^https?:\/\//
     end
 
     def city

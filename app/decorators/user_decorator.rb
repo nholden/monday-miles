@@ -23,4 +23,8 @@ class UserDecorator < Draper::Decorator
     object.monday_activities.pluck(:start_time).map(&:year).uniq.to_json
   end
 
+  def profile_or_placeholder_image_url
+    object.large_profile_image_url || h.image_url('logo.svg')
+  end
+
 end

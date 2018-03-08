@@ -20,12 +20,16 @@
       padding: 15px 30px;
 
       .photo {
+        height: 124px;
+        width: 124px;
         margin: 0 10px;
+        border-radius: 62px;
+        background-color: $grey-dark;
 
         img {
-          height: 124px;
-          width: 124px;
-          border-radius: 62px;
+          height: inherit;
+          width: inherit;
+          border-radius: inherit;
         }
       }
 

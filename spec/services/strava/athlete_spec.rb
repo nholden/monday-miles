@@ -32,12 +32,28 @@ RSpec.describe Strava::Athlete do
 
   describe "#medium_profile_image_url" do
     When(:result) { strava_athlete.medium_profile_image_url }
-    Then { result == 'http://pics.com/227615/medium.jpg' }
+
+    context "when Strava returns an absolute URL to a real photo" do
+      Then { result == 'http://pics.com/227615/medium.jpg' }
+    end
+
+    context "when Strava returns a relative path to a default avatar" do
+      Given { data['profile_medium'] = '/avatar/athlete/medium.png' }
+      Then { result.nil? }
+    end
   end
 
   describe "#large_profile_image_url" do
     When(:result) { strava_athlete.large_profile_image_url }
-    Then { result == 'http://pics.com/227615/large.jpg' }
+
+    context "when Strava returns an absolute URL to a real photo" do
+      Then { result == 'http://pics.com/227615/large.jpg' }
+    end
+
+    context "when Strava returns a relative path to a default avatar" do
+      Given { data['profile'] = '/avatar/athlete/large.png' }
+      Then { result.nil? }
+    end
   end
 
   describe "#city" do
