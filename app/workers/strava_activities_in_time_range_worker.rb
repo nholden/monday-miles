@@ -8,7 +8,9 @@ class StravaActivitiesInTimeRangeWorker
     start_time = start_time_string.present? ? Time.parse(start_time_string) : nil
 
     athlete.activities(start_time: start_time, end_time: Time.parse(end_time_string)).map do |strava_activity|
-      Activity.from_strava_activity(strava_activity, user: user).save!
+      if strava_activity.monday?
+        Activity.from_strava_activity(strava_activity, user: user).save!
+      end
     end
   end
 

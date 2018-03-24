@@ -13,7 +13,9 @@ class StravaActivityWorker
     if strava_activity.deleted?
       logger.info "[StravaActivityWorker] Strava activity with ID #{strava_activity_id} not found. Not creating or updating Activity record."
     else
-      Activity.from_strava_activity(strava_activity, user: user).save!
+      if strava_activity.monday?
+        Activity.from_strava_activity(strava_activity, user: user).save!
+      end
     end
   end
 

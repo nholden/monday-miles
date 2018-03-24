@@ -22,21 +22,23 @@ RSpec.describe StravaActivitiesInTimeRangeWorker do
         Given(:end_time) { Time.current }
 
         context "when none of the activities already exist in the database" do
-          Then { user_activities.count == 5 }
+          Then { user_activities.count == 1 }
           And { user_activities.where('start_time < ?', start_time).none? }
           And { user_activities.where('start_time > ?', end_time).none? }
+          And { user_activities.all?(&:monday?) }
         end
 
         context "when one of the activities already exists in the database" do
           Given!(:existing_activity) { FactoryGirl.create(:activity,
                                                           user: user,
-                                                          strava_id: 1228328056,
+                                                          strava_id: 1222681008,
                                                           name: 'Old activity name') }
 
           When { existing_activity.reload }
 
-          Then { user_activities.count == 5 }
-          And { existing_activity.name == 'Warmup for hockey night in San Diego #letsgogulls #protectthenest' }
+          Then { user_activities.count == 1 }
+          And { existing_activity.name == 'Later start but keeping the Monday morning run streak alive' }
+          And { user_activities.all?(&:monday?) }
         end
       end
 
@@ -46,9 +48,10 @@ RSpec.describe StravaActivitiesInTimeRangeWorker do
         Given(:start_time) { 3.weeks.ago }
         Given(:end_time) { 1.week.ago }
 
-        Then { user_activities.count == 9 }
+        Then { user_activities.count == 2 }
         And { user_activities.where('start_time < ?', start_time).none? }
         And { user_activities.where('start_time > ?', end_time).none? }
+        And { user_activities.all?(&:monday?) }
       end
     end
 
