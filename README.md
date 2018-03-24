@@ -37,4 +37,4 @@ bundle exec rake
 Contributions are welcome from everyone! Feel free to make a pull request or use GitHub issues for help getting started, to report bugs, or to make feature requests.
 
 ## License
-This project was created by [Nick Holden](https://nickholen.io) and is licensed under the terms of the MIT license.
+This project was created by [Nick Holden](https://www.nickholden.io) and is licensed under the terms of the MIT license.
