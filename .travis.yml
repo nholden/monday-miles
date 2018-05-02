@@ -1,6 +1,6 @@
 language: ruby
 rvm:
-  - 2.5.0
+  - 2.5.1
 install:
   - . $HOME/.nvm/nvm.sh
   - nvm install $NODE_VERSION
