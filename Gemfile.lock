@@ -177,7 +177,7 @@ GEM
     rack (2.0.5)
     rack-mini-profiler (0.10.6)
       rack (>= 1.2.0)
-    rack-protection (2.0.1)
+    rack-protection (2.0.3)
       rack
     rack-proxy (0.6.2)
       rack
@@ -268,10 +268,10 @@ GEM
       concurrent-ruby (~> 1.0)
       connection_pool (~> 2.2, >= 2.2.0)
       redis (~> 3.2, >= 3.2.1)
-    sinatra (2.0.1)
+    sinatra (2.0.3)
       mustermann (~> 1.0)
       rack (~> 2.0)
-      rack-protection (= 2.0.1)
+      rack-protection (= 2.0.3)
       tilt (~> 2.0)
     sorcerer (1.0.2)
     spring (2.0.2)
@@ -357,7 +357,7 @@ DEPENDENCIES
   sass-rails (~> 5.0)
   secure_headers
   sidekiq
-  sinatra
+  sinatra (~> 2.0.1)
   spring
   spring-watcher-listen (~> 2.0.0)
   stackprof
