@@ -1,7 +1,12 @@
 class User < ApplicationRecord
 
+  STALE_AFTER_TIME = 3.months
+
   has_many :activities
   has_many :monday_activities, -> { monday }, class_name: 'Activity'
+
+  scope :not_archived, -> { where(archived_at: nil) }
+  scope :stale, -> { where("last_signed_in_at < ?", STALE_AFTER_TIME.ago) }
 
   delegate :length, :started, :ended, :current?,
     to: :recent_monday_streak, prefix: true
@@ -27,6 +32,10 @@ class User < ApplicationRecord
 
   def recent_monday_streak
     monday_streaks.recent
+  end
+
+  def archived?
+    archived_at.present?
   end
 
   private

@@ -7,7 +7,8 @@ module Strava
         user.strava_access_token = auth_response.access_token
         user.last_signed_in_at = Time.current
 
-        if user.new_record?
+        if user.new_record? || user.archived?
+          user.archived_at = nil
           user.save!
           StravaActivitiesInTimeRangeWorker.perform_async(user.id, nil, Time.current.iso8601)
           session[:current_user_id] = user.id

@@ -41,13 +41,23 @@ RSpec.describe "authentication" do
                                                     strava_id: 227615,
                                                     strava_access_token: existing_strava_access_token,
                                                     large_profile_image_url: existing_large_profile_image_url,
-                                                    last_signed_in_at: 2.days.ago) }
+                                                    last_signed_in_at: 2.days.ago,
+                                                    archived_at: archived_at) }
         Given(:existing_strava_access_token) { '83ebeabdec09f6670863766f792ead24d61fe3f9' }
         Given(:existing_large_profile_image_url) { 'http://pics.com/227615/large.jpg' }
+        Given(:archived_at) { nil }
 
         When { existing_user.reload }
 
         Invariant { existing_user.slug == 'john-applestrava' }
+
+        context "when the user is archived" do
+          Given(:archived_at) { 1.day.ago }
+
+          Then { !existing_user.archived? }
+          And { expect(page).to have_current_path('/loading') }
+          And { StravaActivitiesInTimeRangeWorker.jobs.size == 1 }
+        end
 
         context "when the user's Strava data has stayed the same" do
           Then { expect(page).to have_current_path(user_profile_path(existing_user.slug)) }
