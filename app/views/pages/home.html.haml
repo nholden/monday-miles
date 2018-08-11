@@ -38,4 +38,4 @@
 
     %p
       #{link_to 'Connect with Strava', '/auth/strava'} now to begin celebrating your Monday finishes,
-      or check out #{link_to 'this sample profile', user_profile_path(User.first.slug) if User.any?}.
+      or check out #{link_to 'this sample profile', user_profile_path(User.not_archived.first.slug) if User.not_archived.any?}.
