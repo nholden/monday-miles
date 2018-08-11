@@ -5,3 +5,7 @@ task :update_user_activities => :environment do
     StravaActivitiesInTimeRangeWorker.perform_async(user.id, start_time_string, Time.current.iso8601)
   end
 end
+
+task :archive_stale_users => :environment do
+  StaleUserArchiverWorker.perform_async
+end
