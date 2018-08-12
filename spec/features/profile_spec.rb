@@ -4,10 +4,11 @@ RSpec.describe "user profiles" do
 
   around { |example| travel_to(Time.iso8601('2017-11-18T00:00:00-07:00'), &example) }
 
-  Given(:user) { FactoryGirl.create(:user, large_profile_image_url: large_profile_image_url) }
+  Given(:user) { FactoryGirl.create(:user, large_profile_image_url: large_profile_image_url, archived_at: archived_at) }
   Given(:large_profile_image_url) { 'https://dgalywyr863hv.cloudfront.net/pictures/athletes/4197670/1346139/6/large.jpg' }
+  Given(:archived_at) { nil }
 
-  When { visit user_profile_path(user.slug) }
+  When(:result) { visit user_profile_path(user.slug) }
 
   def activity(trait, distance:, elevation:, seconds:, name:)
     FactoryGirl.create(
@@ -33,6 +34,11 @@ RSpec.describe "user profiles" do
   context "for a user without a profile photo" do
     Given(:large_profile_image_url) { nil }
     Then { page.status_code == 200 }
+  end
+
+  context "for an archived user" do
+    Given(:archived_at) { 1.month.ago }
+    Then { expect(result).to have_raised ActiveRecord::RecordNotFound }
   end
 
 end
