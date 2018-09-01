@@ -101,7 +101,7 @@ GEM
       railties (>= 3.0.0)
     faraday (0.12.2)
       multipart-post (>= 1.2, < 3)
-    ffi (1.9.18)
+    ffi (1.9.25)
     flamegraph (0.9.5)
     given_core (3.8.0)
       sorcerer (>= 0.3.7)
@@ -372,4 +372,4 @@ RUBY VERSION
    ruby 2.5.1p57
 
 BUNDLED WITH
-   1.16.1
+   1.16.4
