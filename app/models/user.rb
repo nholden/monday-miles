@@ -41,7 +41,7 @@ class User < ApplicationRecord
   private
 
   def monday_streaks
-    MondayStreaks.new(monday_activities.not_deleted.pluck(:start_time).map(&:to_date))
+    MondayStreaks.new(monday_activities.not_deleted.select(:start_time, :utc_offset).map(&:local_start_date))
   end
 
 end
