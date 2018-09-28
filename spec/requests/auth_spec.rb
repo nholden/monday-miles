@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "auth" do
 
-  context "auth path" do
+  context "request access" do
     it "redirects the user to Strava" do
       get strava_auth_request_path
       expect(response.status).to eql 301
@@ -16,9 +16,9 @@ RSpec.describe "auth" do
     end
   end
 
-  context "callback path" do
+  context "successful token exchange" do
     around do |example|
-      VCR.use_cassette('strava_token',
+      VCR.use_cassette('strava_successful_token_exchange',
         match_requests_on: [
           :method,
           VCR.request_matchers.uri_without_params(:client_id, :client_secret),
@@ -37,6 +37,26 @@ RSpec.describe "auth" do
       expect(user.strava_access_token).to eql "fakeaccesstoken"
       expect(user.first_name).to eql "Nick"
       expect(user.last_name).to eql "Holden"
+    end
+  end
+
+  context "unauthorized token exchange" do
+    around do |example|
+      VCR.use_cassette('strava_unauthorized_token_exchange',
+        match_requests_on: [
+          :method,
+          VCR.request_matchers.uri_without_params(:client_id, :client_secret),
+        ],
+        &example
+      )
+    end
+
+    it "fails gracefully and does not create a new User" do
+      code = 'abc123'
+      get "#{Rails.application.routes.url_helpers.strava_auth_callback_path}?code=#{code}"
+
+      expect(response.status).to eql 302
+      expect(User.count).to eql 0
     end
   end
 
