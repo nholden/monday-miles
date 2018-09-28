@@ -1,5 +1,5 @@
 module Strava
-  class AuthRequest
+  module AuthRequest
 
     BASE_URL = 'https://www.strava.com/oauth/authorize'.freeze
     PARAMS = {
