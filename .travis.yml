@@ -18,5 +18,8 @@ services:
 env:
   global:
     - NODE_VERSION=9.3.0
+    - STRAVA_CLIENT_ID=clientid
+    - STRAVA_CLIENT_SECRET=clientsecret
+    - BASE_URL=http://test.localhost
 notifications:
   email: false
