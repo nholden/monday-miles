@@ -2,6 +2,15 @@ module Strava
   class SessionsController < ApplicationController
 
     def create
+      raw_response = Excon.post("https://www.strava.com/oauth/token",
+        query: {
+          client_id: ENV.fetch('STRAVA_CLIENT_ID'),
+          client_secret: ENV.fetch('STRAVA_CLIENT_SECRET'),
+          code: params[:code],
+        }
+      )
+      auth_response = AuthResponse.new(JSON.parse(raw_response.body))
+
       if auth_response.authenticated?
         user = User.from_strava_athlete(auth_response.athlete)
         user.strava_access_token = auth_response.access_token
@@ -22,12 +31,6 @@ module Strava
         flash[:error] = 'Access denied'
         redirect_to root_path
       end
-    end
-
-    private
-
-    def auth_response
-      AuthResponse.new(request.env['omniauth.auth'])
     end
 
   end

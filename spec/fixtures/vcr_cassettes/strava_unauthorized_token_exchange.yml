@@ -1,0 +1,44 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://www.strava.com/oauth/token?client_id=fake&client_secret=fake&code=abc123
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - excon/0.55.0
+  response:
+    status:
+      code: 400
+      message: Bad Request
+    headers:
+      Date:
+      - Fri, 28 Sep 2018 02:38:52 GMT
+      Content-Type:
+      - application/json; charset=UTF-8
+      Connection:
+      - keep-alive
+      Cache-Control:
+      - no-cache
+      Via:
+      - 1.1 linkerd
+      Status:
+      - 400 Bad Request
+      X-Request-Id:
+      - 2f318297-7720-49a1-a4fa-57876659ee17
+      X-Frame-Options:
+      - SAMEORIGIN,DENY
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      Vary:
+      - Origin
+    body:
+      encoding: ASCII-8BIT
+      string: '{"message":"Bad Request","errors":[{"resource":"RequestToken","field":"code","code":"invalid"}]}'
+    http_version:
+  recorded_at: Fri, 28 Sep 2018 02:38:52 GMT
+recorded_with: VCR 3.0.3

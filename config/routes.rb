@@ -3,7 +3,8 @@ require "sidekiq/web"
 Rails.application.routes.draw do
 
   scope module: 'strava' do
-    get '/auth/strava/callback', to: 'sessions#create'
+    get '/auth/strava', to: redirect(Strava::AuthRequest::URL), as: :strava_auth_request
+    get '/auth/strava/callback', to: 'sessions#create', as: :strava_auth_callback
   end
 
   namespace :strava do
