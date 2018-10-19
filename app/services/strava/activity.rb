@@ -87,7 +87,7 @@ module Strava
     end
 
     def deleted?
-      data['message'] == 'Record Not Found'
+      data['message'] && data['message'].match?(/Not Found/)
     end
 
   end
