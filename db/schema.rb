@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_11_161550) do
+ActiveRecord::Schema.define(version: 2018_10_20_223202) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,6 +61,8 @@ ActiveRecord::Schema.define(version: 2018_08_11_161550) do
     t.datetime "last_signed_in_at"
     t.string "slug", null: false
     t.datetime "archived_at"
+    t.datetime "strava_access_token_expires_at"
+    t.string "strava_refresh_token"
     t.index ["slug"], name: "index_users_on_slug", unique: true
   end
 
