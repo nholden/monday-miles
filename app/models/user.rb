@@ -30,6 +30,20 @@ class User < ApplicationRecord
     end
   end
 
+  def refresh_strava_access_token!
+    if strava_access_token_expires_at.nil? || strava_access_token_expires_at < 1.hour.from_now
+      access_token = Strava::API.refresh_access_token(refresh_token: strava_refresh_token)
+
+      update!(
+        strava_access_token: access_token.access_token,
+        strava_access_token_expires_at: access_token.expires_at,
+        strava_refresh_token: access_token.refresh_token
+      )
+    end
+  
+    strava_access_token
+  end
+
   def recent_monday_streak
     monday_streaks.recent
   end
