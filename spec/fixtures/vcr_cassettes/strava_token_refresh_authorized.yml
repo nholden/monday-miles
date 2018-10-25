@@ -1,0 +1,46 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://www.strava.com/oauth/token?client_id=fake&client_secret=fake&grant_type=refresh_token&refresh_token=valid-refresh-token
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - excon/0.55.0
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 25 Oct 2018 01:00:00 GMT
+      Content-Type:
+      - application/json; charset=UTF-8
+      Connection:
+      - keep-alive
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Via:
+      - 1.1 linkerd
+      Status:
+      - 200 OK
+      X-Request-Id:
+      - 6045a8d5-01a7-42f3-befd-e16bf2db8523
+      Etag:
+      - W/"432f1af431fb6d9b228764eaf2a7d6b5"
+      X-Frame-Options:
+      - SAMEORIGIN,DENY
+      X-Content-Type-Options:
+      - nosniff
+      Vary:
+      - Origin
+      X-Xss-Protection:
+      - 1; mode=block
+    body:
+      encoding: ASCII-8BIT
+      string: '{"token_type":"Bearer","access_token":"fake-new-access-token","expires_at":1540450800,"refresh_token":"fake-new-refresh-token"}'
+    http_version:
+  recorded_at: Thu, 25 Oct 2018 01:00:00 GMT
+recorded_with: VCR 3.0.3
