@@ -11,7 +11,7 @@ RSpec.describe Strava::API do
       Given(:path) { 'activities/10707546' }
       Given(:access_token) { 'invalid-token' }
 
-      Then { expect(result).to have_raised(Strava::API::AuthorizationError) }
+      Then { expect(result).to have_raised(Strava::API::UnauthorizedError) }
     end
   end
 
@@ -56,7 +56,7 @@ RSpec.describe Strava::API do
 
       Given(:refresh_token) { 'invalid-refresh-token' }
 
-      Then { expect(result).to have_raised(Strava::API::AuthorizationError) }
+      Then { expect(result).to have_raised(Strava::API::BadRequestError) }
     end
   end
 
