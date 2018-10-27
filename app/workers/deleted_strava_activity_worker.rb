@@ -7,7 +7,7 @@ class DeletedStravaActivityWorker
 
     strava_activity = Strava::Activity.fetch(
       strava_activity_id: strava_activity_id,
-      access_token: user.strava_access_token
+      access_token: user.refresh_strava_access_token!
     )
 
     if strava_activity.deleted?

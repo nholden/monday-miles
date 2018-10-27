@@ -7,6 +7,7 @@ module Strava
           client_id: ENV.fetch('STRAVA_CLIENT_ID'),
           client_secret: ENV.fetch('STRAVA_CLIENT_SECRET'),
           code: params[:code],
+          grant_type: 'authorization_code',
         }
       )
       auth_response = AuthResponse.new(JSON.parse(raw_response.body))
@@ -14,6 +15,8 @@ module Strava
       if auth_response.authenticated?
         user = User.from_strava_athlete(auth_response.athlete)
         user.strava_access_token = auth_response.access_token
+        user.strava_access_token_expires_at = auth_response.access_token_expires_at
+        user.strava_refresh_token = auth_response.refresh_token
         user.last_signed_in_at = Time.current
 
         if user.new_record? || user.archived?

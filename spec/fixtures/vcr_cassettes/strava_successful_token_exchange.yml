@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: post
-    uri: https://www.strava.com/oauth/token?client_id=fake&client_secret=fake&code=abc123
+    uri: https://www.strava.com/oauth/token?client_id=fake&client_secret=fake&code=abc123&grant_type=authorization_code
     body:
       encoding: US-ASCII
       string: ''
@@ -15,7 +15,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Mon, 24 Sep 2018 00:19:56 GMT
+      - Sat, 20 Oct 2018 23:00:00 GMT
       Content-Type:
       - application/json; charset=UTF-8
       Connection:
@@ -27,19 +27,21 @@ http_interactions:
       Status:
       - 200 OK
       X-Request-Id:
-      - 34f2a3d0-c7c5-4a41-8eb1-0d9cba10fec6
+      - c0d98100-d25b-4128-b961-d4a3facf46a0
       Etag:
-      - W/"279e22f97663537e379fae8f99ebfa82"
+      - W/"12b65315b63eab262c8058864b56eaf3"
       X-Frame-Options:
       - SAMEORIGIN,DENY
       X-Content-Type-Options:
       - nosniff
+      Vary:
+      - Origin
       X-Xss-Protection:
       - 1; mode=block
     body:
       encoding: ASCII-8BIT
-      string: '{"token_type":"Bearer","access_token":"fakeaccesstoken","athlete":{"id":4197670,"username":"nickholden","resource_state":2,"firstname":"Nick","lastname":"Holden","city":"San
+      string: '{"token_type":"Bearer","expires_at":1540098000,"refresh_token":"fakerefreshtoken","access_token":"fakeaccesstoken","athlete":{"id":4197670,"username":"nickholden","resource_state":2,"firstname":"Nick","lastname":"Holden","city":"San
         Diego","state":"California","country":"United States","sex":"M","premium":false,"summit":false,"created_at":"2014-03-19T11:46:35Z","updated_at":"2018-01-18T16:39:01Z","badge_type_id":0,"profile_medium":"https://dgalywyr863hv.cloudfront.net/pictures/athletes/4197670/1346139/6/medium.jpg","profile":"https://dgalywyr863hv.cloudfront.net/pictures/athletes/4197670/1346139/6/large.jpg","friend":null,"follower":null,"email":"nick.r.holden@gmail.com"}}'
     http_version:
-  recorded_at: Mon, 24 Sep 2018 00:19:56 GMT
+  recorded_at: Sat, 20 Oct 2018 23:00:00 GMT
 recorded_with: VCR 3.0.3
