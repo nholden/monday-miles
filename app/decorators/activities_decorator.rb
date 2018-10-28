@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ActivitiesDecorator < Draper::CollectionDecorator
 
   def vue_data

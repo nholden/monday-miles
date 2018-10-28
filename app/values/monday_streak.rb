@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class MondayStreak
 
   def initialize(dates:, before:)

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Year < Struct.new(:year)
 
   def mondays_data(on_or_before_date:)

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class MondayActivitiesController < ApplicationController
 
   expose(:user) { User.find_by_slug!(params[:user_slug]) }

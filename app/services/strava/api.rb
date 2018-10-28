@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Strava
   class API
 
@@ -21,11 +23,11 @@ module Strava
     end
 
     def self.refresh_access_token(refresh_token:)
-      response = Excon.post('https://www.strava.com/oauth/token'.freeze,
+      response = Excon.post('https://www.strava.com/oauth/token',
         query: {
           client_id: ENV.fetch('STRAVA_CLIENT_ID'),
           client_secret: ENV.fetch('STRAVA_CLIENT_SECRET'),
-          grant_type: 'refresh_token'.freeze,
+          grant_type: 'refresh_token',
           refresh_token: refresh_token,
         }
       )

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Seconds < Unit
 
   def to_hours

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Strava
   class AuthResponse < Struct.new(:parsed_oauth_response)
 

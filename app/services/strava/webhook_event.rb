@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 module Strava
   class WebhookEvent < Struct.new(:data)
 
-    ACTIVITY_STRAVA_OBJECT_TYPE = 'activity'.freeze
-    CREATE_ASPECT_TYPE = 'create'.freeze
-    UPDATE_ASPECT_TYPE = 'update'.freeze
-    DELETE_ASPECT_TYPE = 'delete'.freeze
+    ACTIVITY_STRAVA_OBJECT_TYPE = 'activity'
+    CREATE_ASPECT_TYPE = 'create'
+    UPDATE_ASPECT_TYPE = 'update'
+    DELETE_ASPECT_TYPE = 'delete'
 
     def created_or_updated_activity?
       strava_object_type == ACTIVITY_STRAVA_OBJECT_TYPE &&

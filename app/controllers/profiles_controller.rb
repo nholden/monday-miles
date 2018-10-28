@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ProfilesController < ApplicationController
 
   expose!(:user) { User.not_archived.find_by_slug!(params[:user_slug]).decorate }

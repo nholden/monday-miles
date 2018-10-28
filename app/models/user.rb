@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class User < ApplicationRecord
 
   STALE_AFTER_TIME = 3.months
@@ -40,7 +42,7 @@ class User < ApplicationRecord
         strava_refresh_token: access_token.refresh_token
       )
     end
-  
+
     strava_access_token
   end
 

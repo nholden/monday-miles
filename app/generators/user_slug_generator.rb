@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UserSlugGenerator < Struct.new(:first_name, :last_name, keyword_init: true)
 
   def generate

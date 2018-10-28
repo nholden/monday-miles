@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Meters < Unit
 
   def to_miles

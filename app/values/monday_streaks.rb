@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class MondayStreaks < Struct.new(:dates)
 
   def recent
