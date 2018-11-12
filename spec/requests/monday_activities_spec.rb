@@ -4,11 +4,12 @@ require 'rails_helper'
 
 RSpec.describe "user monday activities request" do
 
-  around { |example| travel_to(Time.iso8601('2018-01-17T00:00:00-07:00'), &example) }
+  # Monday
+  around { |example| travel_to(Time.iso8601('2018-01-15T00:00:00-07:00'), &example) }
 
-  let(:user) { FactoryGirl.create(:user) }
+  let(:user_with_activities) { FactoryGirl.create(:user) }
 
-  def activity(trait, distance:, elevation:, seconds:, name:, strava_id:, deleted_at: nil)
+  def activity(trait, user: user_with_activities, distance: 10_000, elevation: 25, seconds: 2_950, name: "A 10K!", strava_id: 1111, deleted_at: nil)
     FactoryGirl.create(
       :activity,
       trait,
@@ -31,7 +32,7 @@ RSpec.describe "user monday activities request" do
   end
 
   it "fetches JSON with activity data for current year" do
-    get user_monday_activities_path(user.slug), as: :json
+    get user_monday_activities_path(user_with_activities.slug), as: :json
 
     summary = response.parsed_body['summary']
     mondays = response.parsed_body['mondays']
@@ -64,7 +65,7 @@ RSpec.describe "user monday activities request" do
   end
 
   it "fetches JSON with activity data for previous year" do
-    get user_monday_activities_path(user.slug, year: 2017), as: :json
+    get user_monday_activities_path(user_with_activities.slug, year: 2017), as: :json
 
     summary = response.parsed_body['summary']
     mondays = response.parsed_body['mondays']
@@ -90,5 +91,24 @@ RSpec.describe "user monday activities request" do
     expect(activities.first['feetElev']).to eql '246'
     expect(activities.first['duration']).to eql '1:40:00'
     expect(activities.first['stravaUrl']).to eql 'https://www.strava.com/activities/789'
+  end
+
+  it "doesn't include today in Monday data if user hasn't completed activity yet" do
+    user_without_activity_today = FactoryGirl.create(:user)
+    activity(:two_mondays_ago, user: user_without_activity_today)
+
+    get user_monday_activities_path(user_without_activity_today.slug), as: :json
+
+    summary = response.parsed_body['summary']
+    mondays = response.parsed_body['mondays']
+
+    expect(response.status).to eql 200
+    expect(summary['activityCount']).to eql 1
+
+    expect(mondays.count).to eql 2
+    expect(mondays.last['year']).to eql 2018
+    expect(mondays.last['month']).to eql 1
+    expect(mondays.last['day']).to eql 8
+    expect(mondays.last['display']).to eql "Jan. 8, 2018"
   end
 end

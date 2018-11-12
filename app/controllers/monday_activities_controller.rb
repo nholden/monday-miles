@@ -6,8 +6,14 @@ class MondayActivitiesController < ApplicationController
   expose(:year) { (params[:year] || Time.current.year).to_i }
 
   def show
-    render json: user.monday_activities.not_deleted.in_year(year).decorate.vue_data.merge(
-      { mondays: Year.new(year).mondays_data(on_or_before_date: Date.tomorrow) }
+    activities = user.monday_activities.not_deleted.in_year(year)
+
+    render json: activities.decorate.vue_data.merge(
+      {
+        mondays: Year.new(year).mondays_data(
+          on_or_before_date: [Date.yesterday, activities.first.local_start_date].max
+        )
+      }
     )
   end
 
