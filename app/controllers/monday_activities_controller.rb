@@ -11,7 +11,7 @@ class MondayActivitiesController < ApplicationController
     render json: activities.decorate.vue_data.merge(
       {
         mondays: Year.new(year).mondays_data(
-          on_or_before_date: [Date.yesterday, activities.first.local_start_date].max
+          on_or_before_date: [Date.yesterday, activities.first.try(:local_start_date)].compact.max
         )
       }
     )

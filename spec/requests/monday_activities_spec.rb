@@ -111,4 +111,22 @@ RSpec.describe "user monday activities request" do
     expect(mondays.last['day']).to eql 8
     expect(mondays.last['display']).to eql "Jan. 8, 2018"
   end
+
+  it "handles users with no activities" do
+    user_without_activities = FactoryGirl.create(:user)
+
+    get user_monday_activities_path(user_without_activities.slug), as: :json
+
+    summary = response.parsed_body['summary']
+    mondays = response.parsed_body['mondays']
+
+    expect(response.status).to eql 200
+    expect(summary['activityCount']).to eql 0
+
+    expect(mondays.count).to eql 2
+    expect(mondays.last['year']).to eql 2018
+    expect(mondays.last['month']).to eql 1
+    expect(mondays.last['day']).to eql 8
+    expect(mondays.last['display']).to eql "Jan. 8, 2018"
+  end
 end
