@@ -6,6 +6,8 @@ module Strava
     BadRequestError = Class.new(StandardError)
     UnauthorizedError = Class.new(StandardError)
 
+    INVALID_REFRESH_TOKEN_PARSED_RESPONSE = {"message"=>"Bad Request", "errors"=>[{"resource"=>"RefreshToken", "field"=>"code", "code"=>"invalid"}]}
+
     def self.get(path:, access_token:, query: {})
       response = Excon.get("https://www.strava.com/api/v3/#{path}",
                            headers: { 'Authorization' => "Bearer #{access_token}" },
@@ -34,10 +36,13 @@ module Strava
 
       parsed_response = JSON.parse(response.body)
 
-      if response.status == 400
-        raise BadRequestError, parsed_response
-      elsif response.status == 401
+      # Strava responds to requests with an invalid refresh token with a
+      # 400 (Bad Request) status instead of a 401 (Unauthorized) status,
+      # but we should handle these responses as if they were unauthorized.
+      if response.status == 401 || parsed_response == INVALID_REFRESH_TOKEN_PARSED_RESPONSE
         raise UnauthorizedError, parsed_response
+      elsif response.status == 400
+        raise BadRequestError, parsed_response
       else
         AccessToken.new(parsed_response)
       end

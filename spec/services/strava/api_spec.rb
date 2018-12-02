@@ -58,7 +58,7 @@ RSpec.describe Strava::API do
 
       Given(:refresh_token) { 'invalid-refresh-token' }
 
-      Then { expect(result).to have_raised(Strava::API::BadRequestError) }
+      Then { expect(result).to have_raised(Strava::API::UnauthorizedError) }
     end
   end
 
