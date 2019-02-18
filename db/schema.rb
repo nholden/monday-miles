@@ -10,16 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_20_223202) do
+ActiveRecord::Schema.define(version: 2019_02_18_011407) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "activities", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "strava_id"
+    t.bigint "user_id"
+    t.bigint "strava_id"
     t.string "name"
-    t.integer "distance"
+    t.bigint "distance"
     t.integer "moving_time"
     t.integer "elapsed_time"
     t.integer "total_elevation_gain"
@@ -47,7 +47,7 @@ ActiveRecord::Schema.define(version: 2018_10_20_223202) do
   create_table "users", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
-    t.integer "strava_id"
+    t.bigint "strava_id"
     t.string "medium_profile_image_url"
     t.string "large_profile_image_url"
     t.string "city"
