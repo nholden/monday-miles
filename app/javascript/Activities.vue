@@ -9,7 +9,7 @@
         i(class="fa fa-spinner fa-pulse fa-fw")
         span Loading...
     .result(v-show="!loading")
-      .graph
+      .graph(v-click-outside="onClickOutsideGraph")
         svg(
           width="100%"
           :viewBox="'0 0 64 ' + graphHeight"
@@ -18,7 +18,6 @@
             v-for="(monday, index) in mondays"
             v-tippy=""
             v-on:focus="selectedMonday = monday"
-            v-on:blur="selectedMonday = null"
             class="day"
             :class="{ 'day--completed': mondayHasCompletedActivity(monday), 'day--selected': selectedMonday == monday }"
             :title="monday.display"
@@ -42,8 +41,12 @@
 <script lang="coffee">
 import Activity from 'Activity.vue'
 import _ from 'lodash'
+import vClickOutside from 'v-click-outside'
 
 export default
+  directives:
+    clickOutside: vClickOutside.directive
+
   props:
     requestUrl:
       required: true
@@ -101,6 +104,9 @@ export default
     activitiesCompletedOnMonday: (monday) ->
       _.filter(@activities, { year: monday.year, month: monday.month, day: monday.day })
     mondayVerticalGraphPosition: (index) -> Math.floor(index/13) * 5
+    onClickOutsideGraph: (event) ->
+      unless event.target.closest('a')
+        @selectedMonday = null
 
   components: { Activity }
 </script>
