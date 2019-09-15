@@ -1,8 +1,8 @@
 language: ruby
 rvm:
-  - 2.5.3
+  - 2.6.4
 before_install:
-  - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.13.0
+  - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.17.3
   - export PATH="$HOME/.yarn/bin:$PATH"
 install:
   - . $HOME/.nvm/nvm.sh
