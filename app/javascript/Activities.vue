@@ -4,11 +4,7 @@
       | Monday activities in&nbsp;
       select(v-model="year")
         option(v-for="yearOption in yearOptions" :value="yearOption") {{yearOption}}
-    .loader(v-show="loading")
-      .loading-indicator
-        i(class="fa fa-spinner fa-pulse fa-fw")
-        span Loading...
-    .result(v-show="!loading")
+    .result(:class="{ 'result--loading': loading }")
       .graph(v-click-outside="onClickOutsideGraph")
         svg(
           width="100%"
@@ -97,7 +93,7 @@ export default
         @summary = parsedResponse.summary
         @activities = parsedResponse.activities
         @mondays = parsedResponse.mondays
-        setTimeout((=> @loading = false), 1000)
+        @loading = false
       xhr.send()
     mondayHasCompletedActivity: (monday) ->
       @activitiesCompletedOnMonday(monday).length > 0
