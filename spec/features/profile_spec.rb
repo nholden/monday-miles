@@ -30,7 +30,7 @@ RSpec.describe "user profiles" do
     Given { activity(:four_mondays_ago, distance: 20_000, elevation: 75, seconds: 6_000, name: 'Decent Monday 20k') }
     Given { activity(:wednesday, distance: 15_000, elevation: 100, seconds: 5_000, name: 'Neutral Wednesday 15k') }
 
-    Then { expect(page).to have_text 'Streak 2 Nov. 6, 2017 to Nov. 13, 2017' }
+    Then { expect(page).to have_text 'Nov. 6, 2017 to Nov. 13, 2017' }
   end
 
   context "for a user without a profile photo" do
