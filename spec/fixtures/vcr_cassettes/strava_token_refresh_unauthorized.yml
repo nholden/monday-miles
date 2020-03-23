@@ -38,7 +38,7 @@ http_interactions:
       - Origin
     body:
       encoding: ASCII-8BIT
-      string: '{"message":"Bad Request","errors":[{"resource":"RefreshToken","field":"code","code":"invalid"}]}'
+      string: '{"message":"Bad Request","errors":[{"resource":"RefreshToken","field":"refresh_token","code":"invalid"}]}'
     http_version:
   recorded_at: Thu, 25 Oct 2018 01:00:00 GMT
 recorded_with: VCR 3.0.3
