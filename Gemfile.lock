@@ -93,7 +93,7 @@ GEM
       activesupport (~> 5.0)
       request_store (~> 1.0)
     erubi (1.8.0)
-    excon (0.55.0)
+    excon (0.71.0)
     execjs (2.7.0)
     factory_girl (4.8.0)
       activesupport (>= 3.0.0)
