@@ -19,7 +19,7 @@ class DeletedStravaActivityWorker
         logger.info "[DeletedStravaActivityWorker] Activity with strava ID #{strava_activity_id} not found. Not deleting Activity record."
       end
     else
-      raise 'Tried to delete non-deleted Strava activity'
+      logger.info "[DeletedStravaActivityWorker] Activity with strava ID #{strava_activity_id} not deleted. Not deleting Activity record."
     end
   end
 
