@@ -13,6 +13,7 @@ class DeletedStravaActivityWorker
         access_token: user.refresh_strava_access_token!
       )
     rescue Strava::API::ForbiddenError => ex
+      Rails.logger.info "[DeletedStravaActivityWorker] Rescued Strava::API::ForbiddenError: #{ex.message}. Archiving user #{user.id}."
       user.archive!
       return
     end

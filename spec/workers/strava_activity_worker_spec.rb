@@ -57,6 +57,17 @@ RSpec.describe StravaActivityWorker do
       Then { Activity.where(strava_id: strava_activity_id).none? }
     end
 
+    context "archives the user if Strava returns a 403" do
+      around do |example|
+        travel_to(Time.parse('2018-10-25T01:00:00Z')) do
+          VCR.use_cassette('strava_forbidden', &example)
+        end
+      end
+
+      Given(:archived_at) { nil }
+      When { user.reload }
+      Then { expect(user.archived_at).to eql(Time.current) }
+    end
   end
 
 end
