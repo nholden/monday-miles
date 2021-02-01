@@ -54,6 +54,11 @@ class User < ApplicationRecord
     archived_at.present?
   end
 
+  def archive!
+    update!(archived_at: Time.current)
+    activities.delete_all
+  end
+
   private
 
   def monday_streaks

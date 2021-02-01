@@ -7,10 +7,15 @@ class DeletedStravaActivityWorker
   def perform(strava_athlete_id, strava_activity_id)
     user = User.find_by_strava_id!(strava_athlete_id)
 
-    strava_activity = Strava::Activity.fetch(
-      strava_activity_id: strava_activity_id,
-      access_token: user.refresh_strava_access_token!
-    )
+    begin
+      strava_activity = Strava::Activity.fetch(
+        strava_activity_id: strava_activity_id,
+        access_token: user.refresh_strava_access_token!
+      )
+    rescue Strava::API::ForbiddenError => ex
+      user.archive!
+      return
+    end
 
     if strava_activity.deleted?
       if activity = Activity.find_by_strava_id(strava_activity_id)

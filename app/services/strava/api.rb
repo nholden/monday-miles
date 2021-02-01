@@ -5,18 +5,25 @@ module Strava
 
     BadRequestError = Class.new(StandardError)
     UnauthorizedError = Class.new(StandardError)
+    ForbiddenError = Class.new(StandardError)
 
     def self.get(path:, access_token:, query: {})
       response = Excon.get("https://www.strava.com/api/v3/#{path}",
                            headers: { 'Authorization' => "Bearer #{access_token}" },
                            query: query)
 
-      parsed_response = JSON.parse(response.body)
+      parsed_response = begin
+        JSON.parse(response.body)
+      rescue JSON::ParserError
+        nil
+      end
 
       if response.status == 400
         raise BadRequestError, parsed_response
       elsif response.status == 401
         raise UnauthorizedError, parsed_response
+      elsif response.status == 403
+        raise ForbiddenError, parsed_response
       else
         JSON.parse(response.body)
       end
