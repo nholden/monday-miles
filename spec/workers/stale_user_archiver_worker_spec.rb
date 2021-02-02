@@ -13,15 +13,15 @@ RSpec.describe StaleUserArchiverWorker do
     When { worker.perform }
     When { user.reload }
 
-    context "archives a user who hasn't logged in during the last two months" do
-      Given(:last_signed_in_at) { 3.months.ago }
+    context "archives a user who hasn't logged in during the last month" do
+      Given(:last_signed_in_at) { 6.weeks.ago }
 
       Then { user.archived? }
       And { user.activities.none? }
     end
 
-    context "doesn't archive a user who logged in during the last two months" do
-      Given(:last_signed_in_at) { 1.month.ago }
+    context "doesn't archive a user who logged in during the last month" do
+      Given(:last_signed_in_at) { 3.weeks.ago }
 
       Then { !user.archived? }
       And { user.activities.one? }

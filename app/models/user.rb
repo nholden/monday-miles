@@ -2,7 +2,7 @@
 
 class User < ApplicationRecord
 
-  STALE_AFTER_TIME = 2.months
+  STALE_AFTER_TIME = 1.month
 
   has_many :activities
   has_many :monday_activities, -> { monday }, class_name: 'Activity'
