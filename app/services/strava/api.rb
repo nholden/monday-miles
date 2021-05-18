@@ -6,6 +6,7 @@ module Strava
     BadRequestError = Class.new(StandardError)
     UnauthorizedError = Class.new(StandardError)
     ForbiddenError = Class.new(StandardError)
+    TooManyRequestsError = Class.new(StandardError)
 
     def self.get(path:, access_token:, query: {})
       response = Excon.get("https://www.strava.com/api/v3/#{path}",
@@ -24,6 +25,8 @@ module Strava
         raise UnauthorizedError, parsed_response
       elsif response.status == 403
         raise ForbiddenError, parsed_response
+      elsif response.status == 429
+        raise TooManyRequestsError, parsed_response
       else
         JSON.parse(response.body)
       end

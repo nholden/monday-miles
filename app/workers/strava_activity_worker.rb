@@ -19,6 +19,9 @@ class StravaActivityWorker
         Rails.logger.info "[StravaActivityWorker] Rescued Strava::API::ForbiddenError: #{ex.message}. Archiving user #{user.id}."
         user.archive!
         return
+      rescue Strava::API::TooManyRequestsError => ex
+        Rails.logger.info "[StravaActivityWorker] Rescued Strava::API::TooManyRequestsError: #{ex.message}."
+        return
       end
 
       if strava_activity.deleted?

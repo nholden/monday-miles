@@ -1,0 +1,55 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://www.strava.com/api/v3/activities/122027191
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Authorization:
+      - Bearer faket0k3n
+  response:
+    status:
+      code: 429
+      message: Too Many Requests
+    headers:
+      Date:
+      - Tue, 18 May 2021 13:26:54 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Connection:
+      - keep-alive
+      Cache-Control:
+      - no-cache
+      Via:
+      - 1.1 linkerd
+      X-Download-Options:
+      - noopen
+      Status:
+      - 429 Too Many Requests
+      X-Ratelimit-Limit:
+      - '600,30000'
+      X-Request-Id:
+      - c6f12d98-7fca-4f60-916b-3d2827d98484
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Frame-Options:
+      - DENY
+      X-Ratelimit-Usage:
+      - '1341,34055'
+      X-Content-Type-Options:
+      - nosniff
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Vary:
+      - Origin
+      X-Xss-Protection:
+      - 1; mode=block
+    body:
+      encoding: ASCII-8BIT
+      string: '{"message":"Rate Limit Exceeded","errors":[{"resource":"Application","field":"rate
+        limit","code":"exceeded"}]}'
+    http_version:
+  recorded_at: Tue, 18 May 2021 13:26:54 GMT
+recorded_with: VCR 3.0.3

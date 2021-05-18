@@ -68,6 +68,14 @@ RSpec.describe StravaActivityWorker do
       When { user.reload }
       Then { expect(user.archived_at).to eql(Time.current) }
     end
+
+    context "it does not create a new activity when rate limited" do
+      around { |example| VCR.use_cassette('strava_rate_limited', &example) }
+
+      Given(:archived_at) { nil }
+      Given(:activity) { Activity.find_by_strava_id(strava_activity_id) }
+      Then { !activity }
+    end
   end
 
 end
