@@ -18,6 +18,7 @@
 
 .byebug_history
 .env
+.tool-versions
 /public/packs
 /public/packs-test
 /node_modules
